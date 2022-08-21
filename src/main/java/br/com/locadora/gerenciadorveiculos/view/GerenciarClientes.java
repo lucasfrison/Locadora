@@ -5,13 +5,21 @@
 package br.com.locadora.gerenciadorveiculos.view;
 
 import br.com.locadora.gerenciadorveiculos.UIComponents.ClientesTableModel;
+import br.com.locadora.gerenciadorveiculos.controller.ClienteController;
+import br.com.locadora.gerenciadorveiculos.dao.ClienteDAO;
+import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;
+import br.com.locadora.gerenciadorveiculos.model.Cliente;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author lucfg
  */
 public class GerenciarClientes extends javax.swing.JFrame {
-
+    
+    private Cliente cliente;
+    private ClienteController clienteController = new ClienteController();
     /**
      * Creates new form GerenciarClientes
      */
@@ -80,6 +88,11 @@ public class GerenciarClientes extends javax.swing.JFrame {
         }
 
         bIncluirCliente.setText("Incluir Cliente");
+        bIncluirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bIncluirClienteActionPerformed(evt);
+            }
+        });
 
         bListarClientes.setText("Listar Clientes");
 
@@ -214,6 +227,12 @@ public class GerenciarClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tFNomeActionPerformed
 
+    private void bIncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIncluirClienteActionPerformed
+        adicionarCliente(tFNome.getText(), tFSobrenome.getText(), tFRG.getText()
+        , tFCPF.getText(), tFEndereco.getText());
+        limparForm();
+    }//GEN-LAST:event_bIncluirClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -270,4 +289,26 @@ public class GerenciarClientes extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tFRG;
     private javax.swing.JTextField tFSobrenome;
     // End of variables declaration//GEN-END:variables
+
+    private void adicionarCliente(String nome, String sobrenome, String RG,
+    String CPF, String endereco) {
+        cliente = new Cliente(nome, sobrenome, RG,
+                CPF, endereco);
+        
+        if (clienteController.adicionarCliente(cliente)) {
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao cadastrar o cliente! Verifique se preencheu todos os campos.",
+                    "Aviso!", JOptionPane.WARNING_MESSAGE);
+        }    
+    }
+
+    private void limparForm() {
+        tFNome.setText("");
+        tFSobrenome.setText("");
+        tFRG.setText("");
+        tFCPF.setText("");
+        tFEndereco.setText("");
+    }
 }

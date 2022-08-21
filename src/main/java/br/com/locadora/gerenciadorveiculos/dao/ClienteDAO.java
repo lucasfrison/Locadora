@@ -27,11 +27,11 @@ public class ClienteDAO {
             String sql = "INSERT INTO CLIENTE (NOME, SOBRENOME, RG, CPF, ENDERECO) VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                pstm.setString(1, "TESTE");
-		pstm.setString(2, "DA SILVA");
-                pstm.setInt(3, 132552000);
-                pstm.setLong(4, 10659466945L);
-                pstm.setString(5, "RUA WALFRIDO FERREIRA DE ANDRADE");
+                pstm.setString(1, cliente.getNome());
+		pstm.setString(2, cliente.getSobrenome());
+                pstm.setString(3, cliente.getRG());
+                pstm.setString(4, cliente.getCPF());
+                pstm.setString(5, cliente.getEndereco());
                 pstm.execute();
             }
         } catch (SQLException e) {

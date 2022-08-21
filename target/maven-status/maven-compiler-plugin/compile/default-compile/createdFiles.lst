@@ -1,7 +1,9 @@
 br\com\locadora\gerenciadorveiculos\UIComponents\ClientesTableModel.class
+br\com\locadora\gerenciadorveiculos\service\ClienteService.class
 br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$6.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$9.class
 br\com\locadora\gerenciadorveiculos\view\DevolverVeiculos$2.class
+br\com\locadora\gerenciadorveiculos\controller\ClienteController.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$2.class
 br\com\locadora\gerenciadorveiculos\model\ModeloAutomovel.class
 br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$2.class
@@ -17,6 +19,7 @@ br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$3.class
 br\com\locadora\gerenciadorveiculos\UIComponents\AlugarVeiculosTableModel.class
 br\com\locadora\gerenciadorveiculos\view\VenderVeiculos.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$8.class
+br\com\locadora\gerenciadorveiculos\dao\ClienteDAO.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$1.class
 br\com\locadora\gerenciadorveiculos\view\DevolverVeiculos$1.class
 br\com\locadora\gerenciadorveiculos\view\GerenciarClientes$1.class
@@ -43,6 +46,7 @@ br\com\locadora\gerenciadorveiculos\model\IVeiculo.class
 br\com\locadora\gerenciadorveiculos\view\GerenciarClientes.class
 br\com\locadora\gerenciadorveiculos\model\Automovel.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$3.class
+br\com\locadora\gerenciadorveiculos\view\GerenciarClientes$3.class
 br\com\locadora\gerenciadorveiculos\view\DevolverVeiculos$3.class
 br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$7.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$10.class
