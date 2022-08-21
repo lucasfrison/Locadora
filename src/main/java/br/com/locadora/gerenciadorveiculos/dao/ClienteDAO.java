@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -38,4 +40,31 @@ public class ClienteDAO {
             throw new RuntimeException(e);
         }
     }
+    
+    public List<Cliente> listarClientes() {
+	List<Cliente> clientes = new ArrayList<>();
+	try {
+            String sql = "SELECT NOME, SOBRENOME, RG, CPF, ENDERECO FROM PRODUTO";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.execute();
+		popularListaClientes(clientes, pstm);
+            }
+            return clientes;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    private void popularListaClientes(List<Cliente> clientes, PreparedStatement pstm) throws SQLException {
+	
+        try (ResultSet rst = pstm.getResultSet()) {
+            while (rst.next()) {
+		Cliente cliente = new Cliente(rst.getString(1), rst.getString(2),
+                    rst.getString(3), rst.getString(4), rst.getString(5));
+		clientes.add(cliente);
+            }
+	}
+    }
+    
 }
