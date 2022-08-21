@@ -11,6 +11,11 @@ public class ClientesTableModel extends AbstractTableModel{
     private final String[] colunas = {
         "Nome", "Sobrenome", "RG", "CPF", "Endereço"
     };
+    
+    private String[][] linhas = {
+        {"a","b","c","d","e"},
+        {"f","g","h","i","j"}
+    }; 
 
     public ClientesTableModel() {
 
@@ -18,7 +23,7 @@ public class ClientesTableModel extends AbstractTableModel{
     
     @Override
     public int getRowCount() {
-        return 0;
+        return linhas.length;
     }
 
     @Override
@@ -28,7 +33,7 @@ public class ClientesTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return this;
+        return linhas[rowIndex][columnIndex];
     }
 
     @Override

@@ -291,7 +291,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void adicionarCliente(String nome, String sobrenome, String RG,
-    String CPF, String endereco) {
+        String CPF, String endereco) {
         cliente = new Cliente(nome, sobrenome, RG,
                 CPF, endereco);
         

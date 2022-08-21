@@ -4,17 +4,21 @@
  */
 package br.com.locadora.gerenciadorveiculos.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author lucfg
  */
 public class Cliente {
     
-    final private String nome;
-    final private String sobrenome;
-    final private String RG;
-    final private String CPF;
-    final private String endereco;
+    private String nome;
+    private String sobrenome;
+    private String RG;
+    private String CPF;
+    private String endereco;
+    public static List<Cliente> clientes = new ArrayList<>();
 
     public Cliente(String nome, String sobrenome, String rg, String cpf, String endereco) {
         this.nome = nome;
