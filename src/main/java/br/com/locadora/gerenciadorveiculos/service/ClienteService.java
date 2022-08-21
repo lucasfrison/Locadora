@@ -20,6 +20,15 @@ public class ClienteService {
     private ClienteDAO clienteDAO = new ClienteDAO(connection);
     
     public boolean adicionarCliente(Cliente cliente) {
+        
+        if (!validarCliente(cliente)) return false;
+        
+        clienteDAO.adicionarCliente(cliente);
+        return true;
+    }
+    
+    private boolean validarCliente(Cliente cliente) {
+        
         String cpf = cliente.getCPF();
         String rg = cliente.getRG();
         
@@ -31,10 +40,8 @@ public class ClienteService {
         
         boolean clienteInvalido = (cliente.getNome().equals("") || rg == null
                 || cpf == null || cliente.getEndereco().equals(""));
-        if (clienteInvalido) {
-            return false;
-        }
-        clienteDAO.adicionarCliente(cliente);
+        
+        if (clienteInvalido) return false;
         return true;
     }
     
