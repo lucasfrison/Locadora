@@ -8,6 +8,8 @@ import br.com.locadora.gerenciadorveiculos.dao.ClienteDAO;
 import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -22,9 +24,26 @@ public class ClienteService {
     public boolean adicionarCliente(Cliente cliente) {
         
         if (!validarCliente(cliente)) return false;
-        
-        clienteDAO.adicionarCliente(cliente);
-        return true;
+        try {
+            clienteDAO.adicionarCliente(cliente);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }    
+    }
+    
+    public List<Cliente> listarClientes() {
+        return clienteDAO.listarClientes();
+    }
+    
+    public boolean removerCliente(Cliente cliente) {
+        //adicionar validação de veículos alugados
+        try {
+            clienteDAO.removerCliente(cliente.getCPF());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
     
     private boolean validarCliente(Cliente cliente) {

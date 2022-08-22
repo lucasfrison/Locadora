@@ -44,7 +44,7 @@ public class ClienteDAO {
     public List<Cliente> listarClientes() {
 	List<Cliente> clientes = new ArrayList<>();
 	try {
-            String sql = "SELECT NOME, SOBRENOME, RG, CPF, ENDERECO FROM PRODUTO";
+            String sql = "SELECT NOME, SOBRENOME, RG, CPF, ENDERECO FROM CLIENTE";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
                 pstm.execute();
@@ -54,6 +54,15 @@ public class ClienteDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    
+    public void removerCliente(String CPF) {
+        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM CLIENTE WHERE CPF = ?")) {
+            stm.setString(1, CPF);
+            stm.execute();
+	} catch (SQLException e) {
+            throw new RuntimeException(e);
+	}
     }
     
     private void popularListaClientes(List<Cliente> clientes, PreparedStatement pstm) throws SQLException {

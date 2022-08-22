@@ -1,5 +1,6 @@
 package br.com.locadora.gerenciadorveiculos.UIComponents;
 
+import br.com.locadora.gerenciadorveiculos.controller.ClienteController;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -14,15 +15,15 @@ public class ClientesTableModel extends AbstractTableModel{
         "Nome", "Sobrenome", "RG", "CPF", "Endereço"
     };
     
-    private String[][] linhas;
-
-    public ClientesTableModel() {
-
+    public static List<Cliente> listaClientes;
+    
+    public ClientesTableModel(List<Cliente> listaClientes) {
+        this.listaClientes = listaClientes;
     }
     
     @Override
     public int getRowCount() {
-        return 0;
+        return listaClientes.size();
     }
 
     @Override
@@ -32,19 +33,52 @@ public class ClientesTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return linhas[rowIndex][columnIndex];
-    }
+        Cliente cliente = listaClientes.get(rowIndex);
+        switch (columnIndex) {
+            case 0: 
+                return cliente.getNome();
+            case 1:
+                return cliente.getSobrenome();
+            case 2:
+                return cliente.getCPF();
+            case 3:
+                return cliente.getRG();
+            case 4:
+                return cliente.getEndereco(); 
+           }
+           return null;
+   }
 
     @Override
     public String getColumnName(int column) {
         return colunas[column];
+    } 
+    
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return String.class;
     }
 
     @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        super.setValueAt(aValue, rowIndex, columnIndex);
+    public void fireTableDataChanged() {
+        super.fireTableDataChanged();
     }
 
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
+    @Override
+    public void fireTableRowsDeleted(int firstRow, int lastRow) {
+        super.fireTableRowsDeleted(firstRow, lastRow);
+    }
+
+    @Override
+    public void fireTableCellUpdated(int row, int column) {
+        super.fireTableCellUpdated(row, column);
+    }
+    
     
     
 }

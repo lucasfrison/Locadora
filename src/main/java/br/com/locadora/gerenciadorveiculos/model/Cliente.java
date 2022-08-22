@@ -18,7 +18,6 @@ public class Cliente {
     private String RG;
     private String CPF;
     private String endereco;
-    public static List<Cliente> clientes = new ArrayList<>();
 
     public Cliente(String nome, String sobrenome, String rg, String cpf, String endereco) {
         this.nome = nome;

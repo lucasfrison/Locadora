@@ -13,6 +13,7 @@ br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$5.class
 br\com\locadora\gerenciadorveiculos\view\IncluirVeiculos$1.class
 br\com\locadora\gerenciadorveiculos\model\Locacao.class
 br\com\locadora\gerenciadorveiculos\view\IncluirVeiculos$6.class
+br\com\locadora\gerenciadorveiculos\view\GerenciarClientes$5.class
 br\com\locadora\gerenciadorveiculos\model\Estado.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$5.class
 br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$3.class
@@ -33,6 +34,7 @@ br\com\locadora\gerenciadorveiculos\model\Veiculo.class
 br\com\locadora\gerenciadorveiculos\GerenciadorVeiculos.class
 br\com\locadora\gerenciadorveiculos\view\IncluirVeiculos$7.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$4.class
+br\com\locadora\gerenciadorveiculos\view\GerenciarClientes$4.class
 br\com\locadora\gerenciadorveiculos\view\IncluirVeiculos$3.class
 br\com\locadora\gerenciadorveiculos\model\ModeloMotocicleta.class
 br\com\locadora\gerenciadorveiculos\model\Marca.class

@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class GerenciarClientes extends javax.swing.JFrame {
     
-    private Cliente cliente;
     private ClienteController clienteController = new ClienteController();
+    private ClientesTableModel clientesTableModel = new ClientesTableModel(clienteController.listarClientes());
     /**
      * Creates new form GerenciarClientes
      */
@@ -95,6 +95,11 @@ public class GerenciarClientes extends javax.swing.JFrame {
         });
 
         bListarClientes.setText("Listar Clientes");
+        bListarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bListarClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pCadastroClienteLayout = new javax.swing.GroupLayout(pCadastroCliente);
         pCadastroCliente.setLayout(pCadastroClienteLayout);
@@ -161,7 +166,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        tClientes.setModel(new ClientesTableModel());
+        tClientes.setModel(clientesTableModel);
         sPTabelaClientes.setViewportView(tClientes);
 
         javax.swing.GroupLayout pTabelaClientesLayout = new javax.swing.GroupLayout(pTabelaClientes);
@@ -182,6 +187,11 @@ public class GerenciarClientes extends javax.swing.JFrame {
         bAtualizarCliente.setText("Atualizar Cliente");
 
         bExcluirCliente.setText("Excluir Cliente");
+        bExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bExcluirClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,8 +240,20 @@ public class GerenciarClientes extends javax.swing.JFrame {
     private void bIncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIncluirClienteActionPerformed
         adicionarCliente(tFNome.getText(), tFSobrenome.getText(), tFRG.getText()
         , tFCPF.getText(), tFEndereco.getText());
+        bListarClientes.doClick();
         limparForm();
     }//GEN-LAST:event_bIncluirClienteActionPerformed
+
+    private void bListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarClientesActionPerformed
+       listarClientes();
+       clientesTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_bListarClientesActionPerformed
+
+    private void bExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExcluirClienteActionPerformed
+        int linha = tClientes.getSelectedRow();
+        removerCliente(linha);
+        bListarClientes.doClick();
+    }//GEN-LAST:event_bExcluirClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,14 +314,15 @@ public class GerenciarClientes extends javax.swing.JFrame {
 
     private void adicionarCliente(String nome, String sobrenome, String RG,
         String CPF, String endereco) {
-        cliente = new Cliente(nome, sobrenome, RG,
+        Cliente cliente = new Cliente(nome, sobrenome, RG,
                 CPF, endereco);
-        
+
         if (clienteController.adicionarCliente(cliente)) {
             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+            ClientesTableModel.listaClientes.add(cliente);
         } else {
             JOptionPane.showMessageDialog(null,
-                    "Falha ao cadastrar o cliente! Verifique se preencheu todos os campos.",
+                    "Falha ao cadastrar o cliente!\nVerifique se preencheu todos os campos ou se há campos duplicados.",
                     "Aviso!", JOptionPane.WARNING_MESSAGE);
         }    
     }
@@ -310,5 +333,21 @@ public class GerenciarClientes extends javax.swing.JFrame {
         tFRG.setText("");
         tFCPF.setText("");
         tFEndereco.setText("");
+    }
+
+    private void listarClientes() {
+        clienteController.listarClientes();
+    }
+
+    private void removerCliente(int indice) {
+        Cliente cliente = ClientesTableModel.listaClientes.get(indice);
+        if (clienteController.removerCliente(cliente)) {
+            JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");
+            ClientesTableModel.listaClientes.remove(indice);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao excluir o cliente!\nO cliente possui veículos locados em seu nome.",
+                    "Aviso!", JOptionPane.WARNING_MESSAGE);
+        } 
     }
 }

@@ -4,8 +4,10 @@
  */
 package br.com.locadora.gerenciadorveiculos.controller;
 
+import br.com.locadora.gerenciadorveiculos.UIComponents.ClientesTableModel;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import br.com.locadora.gerenciadorveiculos.service.ClienteService;
+import java.util.List;
 
 /**
  *
@@ -19,4 +21,11 @@ public class ClienteController {
         return clienteService.adicionarCliente(cliente);
     }
     
+    public List<Cliente> listarClientes() {
+        return clienteService.listarClientes();
+    }
+    
+    public boolean removerCliente(Cliente cliente) {
+        return clienteService.removerCliente(cliente);
+    }
 }
