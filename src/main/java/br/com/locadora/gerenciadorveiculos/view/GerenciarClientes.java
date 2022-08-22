@@ -318,12 +318,12 @@ public class GerenciarClientes extends javax.swing.JFrame {
                 CPF, endereco);
 
         if (clienteController.adicionarCliente(cliente)) {
-            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
-            ClientesTableModel.listaClientes.add(cliente);
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null,
                     "Falha ao cadastrar o cliente!\nVerifique se preencheu todos os campos ou se há campos duplicados.",
-                    "Aviso!", JOptionPane.WARNING_MESSAGE);
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
         }    
     }
 
@@ -340,14 +340,17 @@ public class GerenciarClientes extends javax.swing.JFrame {
     }
 
     private void removerCliente(int indice) {
-        Cliente cliente = ClientesTableModel.listaClientes.get(indice);
+        Cliente cliente = null;
+        if (indice > -1)
+            cliente = ClientesTableModel.listaClientes.get(indice);
         if (clienteController.removerCliente(cliente)) {
-            JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");
-            ClientesTableModel.listaClientes.remove(indice);
+            JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null,
-                    "Falha ao excluir o cliente!\nO cliente possui veículos locados em seu nome.",
-                    "Aviso!", JOptionPane.WARNING_MESSAGE);
+                    "Falha ao excluir o cliente!\nO cliente possui veículos locados em seu nome\n"
+                            + "ou nenhum cliente foi selecionado.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
         } 
     }
 }

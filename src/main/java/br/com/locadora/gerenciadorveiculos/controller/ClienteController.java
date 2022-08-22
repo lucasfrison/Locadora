@@ -18,7 +18,11 @@ public class ClienteController {
     private ClienteService clienteService = new ClienteService();
     
     public boolean adicionarCliente(Cliente cliente) {
-        return clienteService.adicionarCliente(cliente);
+        boolean sucesso = clienteService.adicionarCliente(cliente);
+        if (sucesso) {
+            ClientesTableModel.listaClientes.add(cliente);
+        }
+        return sucesso;
     }
     
     public List<Cliente> listarClientes() {
@@ -26,6 +30,7 @@ public class ClienteController {
     }
     
     public boolean removerCliente(Cliente cliente) {
+        ClientesTableModel.listaClientes.remove(cliente);
         return clienteService.removerCliente(cliente);
     }
 }

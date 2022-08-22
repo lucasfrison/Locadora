@@ -20,11 +20,11 @@ public class Cliente {
     private String endereco;
 
     public Cliente(String nome, String sobrenome, String rg, String cpf, String endereco) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
+        this.nome = nome.toUpperCase();
+        this.sobrenome = sobrenome.toUpperCase();
         this.RG = rg;
         this.CPF = cpf;
-        this.endereco = endereco;
+        this.endereco = endereco.toUpperCase();
     }
 
     public String getNome() {
