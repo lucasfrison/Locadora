@@ -36,10 +36,23 @@ public class ClienteService {
         return clienteDAO.listarClientes();
     }
     
+    public Cliente buscarCliente(Cliente cliente) {
+        return clienteDAO.buscarCliente(cliente);
+    }
+    
     public boolean removerCliente(Cliente cliente) {
         //adicionar validação de veículos alugados
         try {
-            clienteDAO.removerCliente(cliente.getCPF());
+            clienteDAO.removerCliente(cliente);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean alterarCliente(Cliente cliente) {
+        try {
+            clienteDAO.alterarCliente(cliente);
             return true;
         } catch (Exception e) {
             return false;

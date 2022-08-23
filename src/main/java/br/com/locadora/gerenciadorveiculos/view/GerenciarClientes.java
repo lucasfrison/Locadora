@@ -166,6 +166,8 @@ public class GerenciarClientes extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        sPTabelaClientes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
         tClientes.setModel(clientesTableModel);
         sPTabelaClientes.setViewportView(tClientes);
 
@@ -185,6 +187,11 @@ public class GerenciarClientes extends javax.swing.JFrame {
         bVoltar.setText("Voltar");
 
         bAtualizarCliente.setText("Atualizar Cliente");
+        bAtualizarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAtualizarClienteActionPerformed(evt);
+            }
+        });
 
         bExcluirCliente.setText("Excluir Cliente");
         bExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -254,6 +261,13 @@ public class GerenciarClientes extends javax.swing.JFrame {
         removerCliente(linha);
         bListarClientes.doClick();
     }//GEN-LAST:event_bExcluirClienteActionPerformed
+
+    private void bAtualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtualizarClienteActionPerformed
+        int linha = tClientes.getSelectedRow();
+        alterarCliente(linha);
+        buscarCliente(linha);
+        bListarClientes.doClick();
+    }//GEN-LAST:event_bAtualizarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,11 +349,11 @@ public class GerenciarClientes extends javax.swing.JFrame {
         tFEndereco.setText("");
     }
 
-    private void listarClientes() {
+    public void listarClientes() {
         clienteController.listarClientes();
     }
 
-    private void removerCliente(int indice) {
+    public void removerCliente(int indice) {
         Cliente cliente = null;
         if (indice > -1)
             cliente = ClientesTableModel.listaClientes.get(indice);
@@ -353,4 +367,27 @@ public class GerenciarClientes extends javax.swing.JFrame {
                     "Atenção!", JOptionPane.WARNING_MESSAGE);
         } 
     }
+    
+    public void alterarCliente(int indice) {
+        Cliente cliente = null;
+        if (indice > -1)
+            cliente = ClientesTableModel.listaClientes.get(indice);
+        if (clienteController.alterarCliente(cliente)) {
+            JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao alterar o cliente!\nOs campos possuem valores inválidos\n"
+                            + "ou nenhum cliente foi selecionado.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        } 
+    }
+    
+    public void buscarCliente(int indice) {
+        Cliente cliente = null;
+        if (indice > -1) {
+            cliente = ClientesTableModel.listaClientes.get(indice);
+            clienteController.buscarCliente(cliente);
+        }
+    }    
 }

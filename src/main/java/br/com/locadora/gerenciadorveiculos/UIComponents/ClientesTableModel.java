@@ -12,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
 public class ClientesTableModel extends AbstractTableModel{
     
     private final String[] colunas = {
-        "Nome", "Sobrenome", "RG", "CPF", "Endereço"
+        "Nome", "Sobrenome", "CPF", "RG", "Endereço"
     };
     
     public static List<Cliente> listaClientes;

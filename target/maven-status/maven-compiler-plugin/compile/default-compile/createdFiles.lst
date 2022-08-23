@@ -60,3 +60,4 @@ br\com\locadora\gerenciadorveiculos\view\IncluirVeiculos$2.class
 br\com\locadora\gerenciadorveiculos\model\Motocicleta.class
 br\com\locadora\gerenciadorveiculos\view\IncluirVeiculos$5.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$6.class
+br\com\locadora\gerenciadorveiculos\view\GerenciarClientes$6.class
