@@ -265,7 +265,6 @@ public class GerenciarClientes extends javax.swing.JFrame {
     private void bAtualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtualizarClienteActionPerformed
         int linha = tClientes.getSelectedRow();
         alterarCliente(linha);
-        buscarCliente(linha);
         bListarClientes.doClick();
     }//GEN-LAST:event_bAtualizarClienteActionPerformed
 
@@ -382,12 +381,5 @@ public class GerenciarClientes extends javax.swing.JFrame {
                     "Atenção!", JOptionPane.WARNING_MESSAGE);
         } 
     }
-    
-    public void buscarCliente(int indice) {
-        Cliente cliente = null;
-        if (indice > -1) {
-            cliente = ClientesTableModel.listaClientes.get(indice);
-            clienteController.buscarCliente(cliente);
-        }
-    }    
+   
 }

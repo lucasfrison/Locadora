@@ -36,10 +36,6 @@ public class ClienteService {
         return clienteDAO.listarClientes();
     }
     
-    public Cliente buscarCliente(Cliente cliente) {
-        return clienteDAO.buscarCliente(cliente);
-    }
-    
     public boolean removerCliente(Cliente cliente) {
         //adicionar validação de veículos alugados
         try {

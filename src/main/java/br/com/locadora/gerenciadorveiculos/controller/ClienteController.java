@@ -28,12 +28,7 @@ public class ClienteController {
     public List<Cliente> listarClientes() {
         return clienteService.listarClientes();
     }
-    
-    public void buscarCliente(Cliente cliente) {
-        Cliente clienteNovo = clienteService.buscarCliente(cliente);
-        ClientesTableModel.listaClientes.add(clienteNovo);
-    }
-    
+   
     public boolean removerCliente(Cliente cliente) {
         ClientesTableModel.listaClientes.remove(cliente);
         return clienteService.removerCliente(cliente);

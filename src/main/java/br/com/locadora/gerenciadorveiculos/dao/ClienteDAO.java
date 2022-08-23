@@ -56,25 +56,6 @@ public class ClienteDAO {
         }
     }
     
-    public Cliente buscarCliente(Cliente cliente) {
-        Cliente clienteNovo = null;
-	try {
-            String sql = "SELECT NOME, SOBRENOME, CPF, RG, ENDERECO FROM CLIENTE WHERE CPF = ?";
-            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-                    pstm.setString(1, cliente.getCPF());
-                    pstm.execute();
-                    ResultSet rst = pstm.getResultSet();
-                    if (rst.next()) {
-                        clienteNovo = new Cliente(rst.getString(1), rst.getString(2),
-                            rst.getString(3), rst.getString(4), rst.getString(5));
-                    }    
-            }
-            return clienteNovo;
-	} catch (SQLException e) {
-            throw new RuntimeException(e);
-	}
-    }
-    
     public void removerCliente(Cliente cliente) {
         try (PreparedStatement stm = connection.prepareStatement("DELETE FROM CLIENTE WHERE CPF = ?")) {
             stm.setString(1, cliente.getCPF());
