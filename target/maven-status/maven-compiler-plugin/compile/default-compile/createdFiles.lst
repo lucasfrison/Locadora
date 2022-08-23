@@ -44,6 +44,7 @@ br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$8.class
 br\com\locadora\gerenciadorveiculos\model\Van.class
 br\com\locadora\gerenciadorveiculos\view\IncluirVeiculos.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos.class
+br\com\locadora\gerenciadorveiculos\factory\ClienteDAOFactory.class
 br\com\locadora\gerenciadorveiculos\model\IVeiculo.class
 br\com\locadora\gerenciadorveiculos\view\GerenciarClientes.class
 br\com\locadora\gerenciadorveiculos\model\Automovel.class
