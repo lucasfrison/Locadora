@@ -36,6 +36,19 @@ public class GerenciarClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dAlterarCliente = new javax.swing.JDialog();
+        lNomeEdit = new javax.swing.JLabel();
+        tFNomeEdit = new javax.swing.JTextField();
+        lSobrenomeEdit = new javax.swing.JLabel();
+        tFSobrenomeEdit = new javax.swing.JTextField();
+        lCPFEdit = new javax.swing.JLabel();
+        tFCPFEdit = new javax.swing.JFormattedTextField();
+        lRGEdit = new javax.swing.JLabel();
+        tFRGEdit = new javax.swing.JFormattedTextField();
+        tFEnderecoEdit = new javax.swing.JTextField();
+        lEnderecoEdit = new javax.swing.JLabel();
+        bConfirmarAlteracao = new javax.swing.JButton();
+        bVoltarEdit = new javax.swing.JButton();
         pCadastroCliente = new javax.swing.JPanel();
         lNome = new javax.swing.JLabel();
         tFNome = new javax.swing.JTextField();
@@ -55,6 +68,117 @@ public class GerenciarClientes extends javax.swing.JFrame {
         bVoltar = new javax.swing.JButton();
         bAtualizarCliente = new javax.swing.JButton();
         bExcluirCliente = new javax.swing.JButton();
+
+        dAlterarCliente.setTitle("Alterar Cliente");
+        dAlterarCliente.setModal(true);
+        dAlterarCliente.setSize(new java.awt.Dimension(617, 281));
+
+        lNomeEdit.setText("Nome");
+
+        tFNomeEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tFNomeEditActionPerformed(evt);
+            }
+        });
+
+        lSobrenomeEdit.setText("Sobrenome");
+
+        lCPFEdit.setText("CPF");
+
+        try {
+            tFCPFEdit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        lRGEdit.setText("RG");
+
+        try {
+            tFRGEdit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        lEnderecoEdit.setText("Endereço");
+
+        bConfirmarAlteracao.setText("Confirmar");
+        bConfirmarAlteracao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConfirmarAlteracaoActionPerformed(evt);
+            }
+        });
+
+        bVoltarEdit.setText("Voltar");
+        bVoltarEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVoltarEditActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dAlterarClienteLayout = new javax.swing.GroupLayout(dAlterarCliente.getContentPane());
+        dAlterarCliente.getContentPane().setLayout(dAlterarClienteLayout);
+        dAlterarClienteLayout.setHorizontalGroup(
+            dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dAlterarClienteLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dAlterarClienteLayout.createSequentialGroup()
+                        .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lCPFEdit)
+                            .addComponent(lEnderecoEdit)
+                            .addComponent(tFCPFEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lRGEdit)
+                            .addComponent(tFRGEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(dAlterarClienteLayout.createSequentialGroup()
+                        .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(dAlterarClienteLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(bConfirmarAlteracao)
+                                .addGap(18, 18, 18)
+                                .addComponent(bVoltarEdit))
+                            .addComponent(tFEnderecoEdit, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dAlterarClienteLayout.createSequentialGroup()
+                                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lNomeEdit)
+                                    .addComponent(tFNomeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lSobrenomeEdit)
+                                    .addComponent(tFSobrenomeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(23, 23, 23))))
+        );
+        dAlterarClienteLayout.setVerticalGroup(
+            dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dAlterarClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lSobrenomeEdit)
+                    .addComponent(lNomeEdit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tFNomeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tFSobrenomeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lCPFEdit)
+                    .addComponent(lRGEdit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tFCPFEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tFRGEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addComponent(lEnderecoEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tFEnderecoEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bConfirmarAlteracao)
+                    .addComponent(bVoltarEdit))
+                .addGap(20, 20, 20))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gerenciar Clientes");
@@ -264,9 +388,23 @@ public class GerenciarClientes extends javax.swing.JFrame {
 
     private void bAtualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtualizarClienteActionPerformed
         int linha = tClientes.getSelectedRow();
-        alterarCliente(linha);
-        bListarClientes.doClick();
+        preencherCliente(linha);
+        //dAlterarCliente.setVisible(true);
+        //alterarCliente(linha);
+        //bListarClientes.doClick();
     }//GEN-LAST:event_bAtualizarClienteActionPerformed
+
+    private void tFNomeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFNomeEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tFNomeEditActionPerformed
+
+    private void bConfirmarAlteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarAlteracaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bConfirmarAlteracaoActionPerformed
+
+    private void bVoltarEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bVoltarEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -305,24 +443,37 @@ public class GerenciarClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAtualizarCliente;
+    private javax.swing.JButton bConfirmarAlteracao;
     private javax.swing.JButton bExcluirCliente;
     private javax.swing.JButton bIncluirCliente;
     private javax.swing.JButton bListarClientes;
     private javax.swing.JButton bVoltar;
+    private javax.swing.JButton bVoltarEdit;
+    private javax.swing.JDialog dAlterarCliente;
     private javax.swing.JLabel lCPF;
+    private javax.swing.JLabel lCPFEdit;
     private javax.swing.JLabel lEndereco;
+    private javax.swing.JLabel lEnderecoEdit;
     private javax.swing.JLabel lNome;
+    private javax.swing.JLabel lNomeEdit;
     private javax.swing.JLabel lRG;
+    private javax.swing.JLabel lRGEdit;
     private javax.swing.JLabel lSobrenome;
+    private javax.swing.JLabel lSobrenomeEdit;
     private javax.swing.JPanel pCadastroCliente;
     private javax.swing.JPanel pTabelaClientes;
     private javax.swing.JScrollPane sPTabelaClientes;
     private javax.swing.JTable tClientes;
     private javax.swing.JFormattedTextField tFCPF;
+    private javax.swing.JFormattedTextField tFCPFEdit;
     private javax.swing.JTextField tFEndereco;
+    private javax.swing.JTextField tFEnderecoEdit;
     private javax.swing.JTextField tFNome;
+    private javax.swing.JTextField tFNomeEdit;
     private javax.swing.JFormattedTextField tFRG;
+    private javax.swing.JFormattedTextField tFRGEdit;
     private javax.swing.JTextField tFSobrenome;
+    private javax.swing.JTextField tFSobrenomeEdit;
     // End of variables declaration//GEN-END:variables
 
     private void adicionarCliente(String nome, String sobrenome, String RG,
@@ -369,8 +520,9 @@ public class GerenciarClientes extends javax.swing.JFrame {
     
     public void alterarCliente(int indice) {
         Cliente cliente = null;
-        if (indice > -1)
+        if (indice > -1) {
             cliente = ClientesTableModel.listaClientes.get(indice);
+        }    
         if (clienteController.alterarCliente(cliente)) {
             JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!",
                     "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
@@ -380,6 +532,20 @@ public class GerenciarClientes extends javax.swing.JFrame {
                             + "ou nenhum cliente foi selecionado.",
                     "Atenção!", JOptionPane.WARNING_MESSAGE);
         } 
+    }
+
+    private void preencherCliente(int indice) {
+        Cliente cliente = null;
+        if (indice > -1) {
+            cliente = ClientesTableModel.listaClientes.get(indice);
+            tFNomeEdit.setText(cliente.getNome());
+            tFSobrenomeEdit.setText(cliente.getSobrenome());
+            tFCPFEdit.setText(cliente.getCPF());
+            tFRGEdit.setText(cliente.getRG());
+            tFEnderecoEdit.setText(cliente.getEndereco());
+            dAlterarCliente.setLocationRelativeTo(this);
+            dAlterarCliente.setVisible(true);
+        }
     }
    
 }

@@ -1,5 +1,6 @@
 br\com\locadora\gerenciadorveiculos\UIComponents\ClientesTableModel.class
 br\com\locadora\gerenciadorveiculos\service\ClienteService.class
+br\com\locadora\gerenciadorveiculos\view\GerenciarClientes$9.class
 br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$6.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$9.class
 br\com\locadora\gerenciadorveiculos\view\DevolverVeiculos$2.class
@@ -17,6 +18,7 @@ br\com\locadora\gerenciadorveiculos\view\GerenciarClientes$5.class
 br\com\locadora\gerenciadorveiculos\model\Estado.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$5.class
 br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$3.class
+br\com\locadora\gerenciadorveiculos\view\GerenciarClientes$8.class
 br\com\locadora\gerenciadorveiculos\UIComponents\AlugarVeiculosTableModel.class
 br\com\locadora\gerenciadorveiculos\view\VenderVeiculos.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$8.class
@@ -39,6 +41,7 @@ br\com\locadora\gerenciadorveiculos\view\IncluirVeiculos$3.class
 br\com\locadora\gerenciadorveiculos\model\ModeloMotocicleta.class
 br\com\locadora\gerenciadorveiculos\model\Marca.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$7.class
+br\com\locadora\gerenciadorveiculos\view\GerenciarClientes$7.class
 br\com\locadora\gerenciadorveiculos\view\IncluirVeiculos$4.class
 br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$8.class
 br\com\locadora\gerenciadorveiculos\model\Van.class
