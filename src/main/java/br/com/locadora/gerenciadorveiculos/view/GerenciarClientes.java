@@ -499,11 +499,11 @@ public class GerenciarClientes extends javax.swing.JFrame {
         tFEndereco.setText("");
     }
 
-    public void listarClientes() {
+    private void listarClientes() {
         clienteController.listarClientes();
     }
 
-    public void removerCliente(int indice) {
+    private void removerCliente(int indice) {
         Cliente cliente = null;
         if (indice > -1)
             cliente = ClientesTableModel.listaClientes.get(indice);
@@ -518,7 +518,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
         } 
     }
     
-    public void alterarCliente(int indice) {
+    private void alterarCliente(int indice) {
         Cliente cliente = null;
         if (indice > -1) {
             cliente = ClientesTableModel.listaClientes.get(indice);
