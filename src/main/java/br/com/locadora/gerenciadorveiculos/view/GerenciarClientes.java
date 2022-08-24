@@ -403,7 +403,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_bConfirmarAlteracaoActionPerformed
 
     private void bVoltarEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarEditActionPerformed
-        // TODO add your handling code here:
+        dAlterarCliente.setVisible(false);
     }//GEN-LAST:event_bVoltarEditActionPerformed
 
     /**
