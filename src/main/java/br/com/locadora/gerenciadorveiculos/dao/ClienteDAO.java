@@ -72,6 +72,7 @@ public class ClienteDAO {
             stm.setString(2, cliente.getSobrenome());
             stm.setString(3, cliente.getRG());
             stm.setString(4, cliente.getEndereco());
+            stm.setString(5, cliente.getCPF());
             stm.execute();
 	} catch (SQLException e) {
             throw new RuntimeException(e);

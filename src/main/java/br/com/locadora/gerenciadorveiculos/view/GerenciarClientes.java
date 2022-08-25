@@ -85,6 +85,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
 
         lCPFEdit.setText("CPF");
 
+        tFCPFEdit.setEditable(false);
         try {
             tFCPFEdit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
@@ -399,11 +400,13 @@ public class GerenciarClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_tFNomeEditActionPerformed
 
     private void bConfirmarAlteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarAlteracaoActionPerformed
-        // TODO add your handling code here:
+        alterarCliente(tFNomeEdit.getText(), tFSobrenomeEdit.getText(), tFRGEdit.getText()
+            , tFCPFEdit.getText(), tFEnderecoEdit.getText());
     }//GEN-LAST:event_bConfirmarAlteracaoActionPerformed
 
     private void bVoltarEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarEditActionPerformed
         dAlterarCliente.setVisible(false);
+        bListarClientes.doClick();
     }//GEN-LAST:event_bVoltarEditActionPerformed
 
     /**
@@ -518,11 +521,11 @@ public class GerenciarClientes extends javax.swing.JFrame {
         } 
     }
     
-    private void alterarCliente(int indice) {
-        Cliente cliente = null;
-        if (indice > -1) {
-            cliente = ClientesTableModel.listaClientes.get(indice);
-        }    
+    private void alterarCliente(String nome, String sobrenome, String RG,
+        String CPF, String endereco) {
+                
+        Cliente cliente = new Cliente(nome, sobrenome, RG,
+            CPF, endereco); 
         if (clienteController.alterarCliente(cliente)) {
             JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!",
                     "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
@@ -535,9 +538,8 @@ public class GerenciarClientes extends javax.swing.JFrame {
     }
 
     private void preencherCliente(int indice) {
-        Cliente cliente = null;
         if (indice > -1) {
-            cliente = ClientesTableModel.listaClientes.get(indice);
+            Cliente cliente = ClientesTableModel.listaClientes.get(indice);
             tFNomeEdit.setText(cliente.getNome());
             tFSobrenomeEdit.setText(cliente.getSobrenome());
             tFCPFEdit.setText(cliente.getCPF());
@@ -545,6 +547,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
             tFEnderecoEdit.setText(cliente.getEndereco());
             dAlterarCliente.setLocationRelativeTo(this);
             dAlterarCliente.setVisible(true);
+            ClientesTableModel.listaClientes.remove(indice);
         }
     }
    

@@ -47,12 +47,13 @@ public class ClienteService {
     }
     
     public boolean alterarCliente(Cliente cliente) {
+        if (!validarCliente(cliente)) return false;
         try {
             clienteDAO.alterarCliente(cliente);
             return true;
-        } catch (Exception e) {
+        } catch(Exception e) {
             return false;
-        }
+        } 
     }
     
     private boolean validarCliente(Cliente cliente) {

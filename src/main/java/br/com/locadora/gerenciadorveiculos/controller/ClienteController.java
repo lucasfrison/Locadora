@@ -37,7 +37,7 @@ public class ClienteController {
     public boolean alterarCliente(Cliente cliente) {
         boolean sucesso = clienteService.alterarCliente(cliente);
         if (sucesso) {
-            ClientesTableModel.listaClientes.remove(cliente);
+            ClientesTableModel.listaClientes.add(cliente);
         }
         return sucesso;
     }
