@@ -10,6 +10,7 @@ import br.com.locadora.gerenciadorveiculos.dao.ClienteDAO;
 import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import java.sql.Connection;
+import java.util.Optional;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
     
     private ClienteController clienteController = new ClienteController();
     private ClientesTableModel clientesTableModel = new ClientesTableModel(clienteController.listarClientes());
+    private Cliente clienteTransfer;
     /**
      * Creates new form GerenciarClientes
      */
@@ -389,10 +391,9 @@ public class GerenciarClientes extends javax.swing.JFrame {
 
     private void bAtualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtualizarClienteActionPerformed
         int linha = tClientes.getSelectedRow();
-        preencherCliente(linha);
-        //dAlterarCliente.setVisible(true);
-        //alterarCliente(linha);
-        //bListarClientes.doClick();
+        if (linha != -1) {
+            clienteTransfer = preencherCliente(linha);
+        }    
     }//GEN-LAST:event_bAtualizarClienteActionPerformed
 
     private void tFNomeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFNomeEditActionPerformed
@@ -400,6 +401,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_tFNomeEditActionPerformed
 
     private void bConfirmarAlteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarAlteracaoActionPerformed
+        ClientesTableModel.listaClientes.remove(clienteTransfer);
         alterarCliente(tFNomeEdit.getText(), tFSobrenomeEdit.getText(), tFRGEdit.getText()
             , tFCPFEdit.getText(), tFEnderecoEdit.getText());
     }//GEN-LAST:event_bConfirmarAlteracaoActionPerformed
@@ -537,18 +539,16 @@ public class GerenciarClientes extends javax.swing.JFrame {
         } 
     }
 
-    private void preencherCliente(int indice) {
-        if (indice > -1) {
-            Cliente cliente = ClientesTableModel.listaClientes.get(indice);
-            tFNomeEdit.setText(cliente.getNome());
-            tFSobrenomeEdit.setText(cliente.getSobrenome());
-            tFCPFEdit.setText(cliente.getCPF());
-            tFRGEdit.setText(cliente.getRG());
-            tFEnderecoEdit.setText(cliente.getEndereco());
-            dAlterarCliente.setLocationRelativeTo(this);
-            dAlterarCliente.setVisible(true);
-            ClientesTableModel.listaClientes.remove(indice);
-        }
+    private Cliente preencherCliente(int indice) {
+        Cliente cliente = ClientesTableModel.listaClientes.get(indice);
+        tFNomeEdit.setText(cliente.getNome());
+        tFSobrenomeEdit.setText(cliente.getSobrenome());
+        tFCPFEdit.setText(cliente.getCPF());
+        tFRGEdit.setText(cliente.getRG());
+        tFEnderecoEdit.setText(cliente.getEndereco());
+        dAlterarCliente.setLocationRelativeTo(this);
+        dAlterarCliente.setVisible(true);
+        return cliente;
     }
    
 }
