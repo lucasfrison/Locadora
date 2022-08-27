@@ -42,11 +42,10 @@ public class IncluirVeiculos extends javax.swing.JFrame {
         cBMarca = new javax.swing.JComboBox(Marca.values());
         bSalvar = new javax.swing.JButton();
         bVoltar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         lCategoria = new javax.swing.JLabel();
         lModelo = new javax.swing.JLabel();
         cBCategoria = new javax.swing.JComboBox(Categoria.values());
-        cBModelo = new javax.swing.JComboBox();
+        cBModelo = new javax.swing.JComboBox(ModeloAutomovel.values());
         tFValorCompra = new javax.swing.JFormattedTextField();
         tFPlaca = new javax.swing.JFormattedTextField();
         lValorCompra = new javax.swing.JLabel();
@@ -122,17 +121,6 @@ public class IncluirVeiculos extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 218, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 35, Short.MAX_VALUE)
-        );
-
         lCategoria.setText("Categoria");
 
         lModelo.setText("Modelo");
@@ -185,9 +173,6 @@ public class IncluirVeiculos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(228, 228, 228))
             .addComponent(pIncluirVeiculos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -243,9 +228,7 @@ public class IncluirVeiculos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tFValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bVoltar)
                     .addComponent(bSalvar))
@@ -284,9 +267,9 @@ public class IncluirVeiculos extends javax.swing.JFrame {
         if (TipoVeiculo.AUTOMÓVEL.equals(cBTipo.getSelectedItem())) {
             cBModelo.setModel(new DefaultComboBoxModel(ModeloAutomovel.enumsToStringArray()));
         } else if (TipoVeiculo.MOTOCICLETA.equals(cBTipo.getSelectedItem())) {
-            cBModelo.setModel(new DefaultComboBoxModel(ModeloAutomovel.enumsToStringArray()));
+            cBModelo.setModel(new DefaultComboBoxModel(ModeloMotocicleta.enumsToStringArray()));
         } else {
-            cBModelo.setModel(new DefaultComboBoxModel(ModeloAutomovel.enumsToStringArray()));
+            cBModelo.setModel(new DefaultComboBoxModel(ModeloVan.enumsToStringArray()));
         } 
     }//GEN-LAST:event_cBTipoActionPerformed
 
@@ -333,7 +316,6 @@ public class IncluirVeiculos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cBMarca;
     private javax.swing.JComboBox<String> cBModelo;
     private javax.swing.JComboBox<String> cBTipo;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lAno;
     private javax.swing.JLabel lCategoria;
     private javax.swing.JLabel lEstado;

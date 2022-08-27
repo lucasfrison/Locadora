@@ -25,8 +25,4 @@ public enum ModeloAutomovel {
         return results;
     }
      
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

@@ -11,5 +11,15 @@ package br.com.locadora.gerenciadorveiculos.model;
 public enum ModeloMotocicleta {
     BIS,
     CG125,
-    CBR500
+    CBR500;
+
+    public static String[] enumsToStringArray() {
+        String[] results = new String[ModeloMotocicleta.values().length];
+        int i = 0;
+        for (ModeloMotocicleta m : ModeloMotocicleta.values()) {
+            results[i] = m.toString();
+            i++;
+        }
+        return results;
+    }
 }

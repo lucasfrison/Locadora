@@ -11,5 +11,15 @@ package br.com.locadora.gerenciadorveiculos.model;
 public enum ModeloVan {
     KOMBI,
     SPRINTER,
-    DUCATO
+    DUCATO;
+    
+    public static String[] enumsToStringArray() {
+        String[] results = new String[ModeloVan.values().length];
+        int i = 0;
+        for (ModeloVan m : ModeloVan.values()) {
+            results[i] = m.toString();
+            i++;
+        }
+        return results;
+    }
 }

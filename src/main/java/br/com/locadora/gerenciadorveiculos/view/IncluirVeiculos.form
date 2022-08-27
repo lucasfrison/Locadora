@@ -32,10 +32,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
-          </Group>
           <Component id="pIncluirVeiculos" alignment="1" min="-2" max="-2" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
@@ -105,9 +101,7 @@
                   <Component id="tFValorCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tFPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="43" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="bVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="bSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -173,8 +167,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cBEstado">
-          <Properties>
-          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cBEstadoActionPerformed"/>
           </Events>
@@ -210,21 +202,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bVoltarActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JPanel" name="jPanel1">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="218" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
     <Component class="javax.swing.JLabel" name="lCategoria">
       <Properties>
         <Property name="text" type="java.lang.String" value="Categoria"/>
@@ -236,8 +213,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cBCategoria">
-      <Properties>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cBCategoriaActionPerformed"/>
       </Events>
@@ -247,13 +222,11 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="cBModelo">
-      <Properties>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cBModeloActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(ModeloAutomovel.values())"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
@@ -292,8 +265,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cBTipo">
-      <Properties>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cBTipoActionPerformed"/>
       </Events>
