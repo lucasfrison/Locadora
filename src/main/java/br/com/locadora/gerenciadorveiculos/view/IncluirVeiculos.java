@@ -147,10 +147,11 @@ public class IncluirVeiculos extends javax.swing.JFrame {
         });
 
         try {
-            tFValorCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####.##")));
+            tFValorCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("######.##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        tFValorCompra.setText("     .  ");
 
         try {
             tFPlaca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("UUU-####")));
@@ -285,7 +286,9 @@ public class IncluirVeiculos extends javax.swing.JFrame {
             }
             limparForm();
         } catch (NumberFormatException e) {
-            
+            JOptionPane.showMessageDialog(null,
+                "Falha ao cadastrar o veículo!\nHá campos inválidos no formulário!",
+                "Atenção!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_bSalvarActionPerformed
 
