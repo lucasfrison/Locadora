@@ -18,8 +18,13 @@ import java.util.List;
  */
 public class ClienteService {
     
-    private ClienteDAOFactory clienteDAOFactory = new ClienteDAOFactory();
-    private ClienteDAO clienteDAO = clienteDAOFactory.getDAO();
+    private ClienteDAOFactory clienteDAOFactory;
+    private ClienteDAO clienteDAO;
+    
+    public ClienteService() {
+        clienteDAOFactory = new ClienteDAOFactory();
+        clienteDAO = clienteDAOFactory.getDAO();
+    }
     
     public boolean adicionarCliente(Cliente cliente) {
         
@@ -67,11 +72,10 @@ public class ClienteService {
         if (cpfInvalido != -1) cpf = null;
         if (rgInvalido != -1) rg = null;
         
-        boolean clienteInvalido = (cliente.getNome().equals("") || rg == null
-                || cpf == null || cliente.getEndereco().equals(""));
+        boolean clienteValido = (!cliente.getNome().equals("") && rg != null
+                && cpf != null && !cliente.getEndereco().equals(""));
         
-        if (clienteInvalido) return false;
-        return true;
+        return clienteValido;
     }
     
 }

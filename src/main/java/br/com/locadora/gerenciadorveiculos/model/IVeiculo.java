@@ -26,5 +26,6 @@ public interface IVeiculo {
     public Integer getAno();
     //Método que calcula um valor para venda. Utilizar o seguinte cálculo://valorParaVenda = valorDeCompra –idadeVeiculoEmAnos*0,15*valorDeCompra//Se o resultado for menor do que 10% do valorDeCompra ou negative, então//        varlorParaVenda = valorDeCompra*0,1public double getValorParaVenda();//Método que será abstrato na classe Veiculo
     public double getValorDiariaLocacao();
+    public double getValorCompra();
     
 }

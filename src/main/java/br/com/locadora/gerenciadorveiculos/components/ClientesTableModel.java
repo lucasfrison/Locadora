@@ -1,4 +1,4 @@
-package br.com.locadora.gerenciadorveiculos.UIComponents;
+package br.com.locadora.gerenciadorveiculos.components;
 
 import br.com.locadora.gerenciadorveiculos.controller.ClienteController;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;

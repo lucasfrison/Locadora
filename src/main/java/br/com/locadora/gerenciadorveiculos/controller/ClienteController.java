@@ -4,7 +4,7 @@
  */
 package br.com.locadora.gerenciadorveiculos.controller;
 
-import br.com.locadora.gerenciadorveiculos.UIComponents.ClientesTableModel;
+import br.com.locadora.gerenciadorveiculos.components.ClientesTableModel;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import br.com.locadora.gerenciadorveiculos.service.ClienteService;
 import java.util.List;
@@ -15,7 +15,11 @@ import java.util.List;
  */
 public class ClienteController {
      
-    private ClienteService clienteService = new ClienteService();
+    private ClienteService clienteService;
+    
+    public ClienteController() {
+        clienteService = new ClienteService();
+    }
     
     public boolean adicionarCliente(Cliente cliente) {
         boolean sucesso = clienteService.adicionarCliente(cliente);

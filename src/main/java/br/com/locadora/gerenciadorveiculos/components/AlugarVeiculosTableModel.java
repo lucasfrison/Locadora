@@ -1,4 +1,4 @@
-package br.com.locadora.gerenciadorveiculos.UIComponents;
+package br.com.locadora.gerenciadorveiculos.components;
 
 import javax.swing.table.AbstractTableModel;
 

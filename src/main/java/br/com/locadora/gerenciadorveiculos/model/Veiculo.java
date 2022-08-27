@@ -47,37 +47,42 @@ public class Veiculo implements IVeiculo {
 
     @Override
     public Estado getEstado() {
-        throw new UnsupportedOperationException("Not supported yet.");    
+        return estado;    
     }
 
     @Override
     public Marca getMarca() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return marca;
     }
 
     @Override
     public Categoria getCategoria() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return categoria;
     }
 
     @Override
     public Locacao getLocacao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return locacao;
     }
 
     @Override
     public String getPlaca() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return placa;
     }
 
     @Override
     public Integer getAno() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return ano;
     }
 
     @Override
     public double getValorDiariaLocacao() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public double getValorCompra() {
+        return valorDeCompra;
     }
     
 }

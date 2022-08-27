@@ -9,7 +9,7 @@ package br.com.locadora.gerenciadorveiculos.model;
  * @author lucfg
  */
 public enum TipoVeiculo {
-    AUTOMÓVEL,
+    AUTOMOVEL,
     MOTOCICLETA,
     VAN
 }

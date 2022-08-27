@@ -4,14 +4,22 @@
  */
 package br.com.locadora.gerenciadorveiculos.view;
 
+import br.com.locadora.gerenciadorveiculos.controller.VeiculoController;
+import br.com.locadora.gerenciadorveiculos.model.Automovel;
 import br.com.locadora.gerenciadorveiculos.model.Categoria;
+import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import br.com.locadora.gerenciadorveiculos.model.Estado;
+import br.com.locadora.gerenciadorveiculos.model.Locacao;
 import br.com.locadora.gerenciadorveiculos.model.Marca;
 import br.com.locadora.gerenciadorveiculos.model.ModeloAutomovel;
 import br.com.locadora.gerenciadorveiculos.model.ModeloMotocicleta;
 import br.com.locadora.gerenciadorveiculos.model.ModeloVan;
+import br.com.locadora.gerenciadorveiculos.model.Motocicleta;
 import br.com.locadora.gerenciadorveiculos.model.TipoVeiculo;
+import br.com.locadora.gerenciadorveiculos.model.Van;
+import br.com.locadora.gerenciadorveiculos.model.Veiculo;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +27,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class IncluirVeiculos extends javax.swing.JFrame {
 
+    private VeiculoController veiculoController = new VeiculoController();
     /**
      * Creates new form IncluirVeiculos
      */
@@ -260,16 +269,33 @@ public class IncluirVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalvarActionPerformed
-        // TODO add your handling code here:
+        try {
+            if (TipoVeiculo.AUTOMOVEL.equals(cBTipo.getSelectedItem())) {
+                adicionarAutomovel((ModeloAutomovel)cBModelo.getSelectedItem(), (Marca)cBMarca.getSelectedItem(), (Estado)cBEstado.getSelectedItem(), 
+                    null, (Categoria)cBCategoria.getSelectedItem(), Double.parseDouble(tFValorCompra.getText()), tFPlaca.getText(), 
+                    Integer.parseInt(tFAno.getText()));
+            } else if (TipoVeiculo.MOTOCICLETA.equals(cBTipo.getSelectedItem())) {
+                adicionarMotocicleta((ModeloMotocicleta)cBModelo.getSelectedItem(), (Marca)cBMarca.getSelectedItem(), (Estado)cBEstado.getSelectedItem(), 
+                    null, (Categoria)cBCategoria.getSelectedItem(), Double.parseDouble(tFValorCompra.getText()), tFPlaca.getText(), 
+                    Integer.parseInt(tFAno.getText()));
+            } else {    
+                adicionarVan((ModeloVan)cBModelo.getSelectedItem(), (Marca)cBMarca.getSelectedItem(), (Estado)cBEstado.getSelectedItem(), 
+                    null, (Categoria)cBCategoria.getSelectedItem(), Double.parseDouble(tFValorCompra.getText()), tFPlaca.getText(), 
+                    Integer.parseInt(tFAno.getText()));
+            }
+            limparForm();
+        } catch (NumberFormatException e) {
+            
+        }
     }//GEN-LAST:event_bSalvarActionPerformed
 
     private void cBTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBTipoActionPerformed
-        if (TipoVeiculo.AUTOMÓVEL.equals(cBTipo.getSelectedItem())) {
-            cBModelo.setModel(new DefaultComboBoxModel(ModeloAutomovel.enumsToStringArray()));
+        if (TipoVeiculo.AUTOMOVEL.equals(cBTipo.getSelectedItem())) {
+            cBModelo.setModel(new DefaultComboBoxModel(ModeloAutomovel.values()));
         } else if (TipoVeiculo.MOTOCICLETA.equals(cBTipo.getSelectedItem())) {
-            cBModelo.setModel(new DefaultComboBoxModel(ModeloMotocicleta.enumsToStringArray()));
+            cBModelo.setModel(new DefaultComboBoxModel(ModeloMotocicleta.values()));
         } else {
-            cBModelo.setModel(new DefaultComboBoxModel(ModeloVan.enumsToStringArray()));
+            cBModelo.setModel(new DefaultComboBoxModel(ModeloVan.values()));
         } 
     }//GEN-LAST:event_cBTipoActionPerformed
 
@@ -329,4 +355,55 @@ public class IncluirVeiculos extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tFPlaca;
     private javax.swing.JFormattedTextField tFValorCompra;
     // End of variables declaration//GEN-END:variables
+
+    private void adicionarAutomovel(ModeloAutomovel modelo, Marca marca, Estado estado,
+        Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano) {
+        
+        Veiculo veiculo = new Automovel(modelo, marca, estado, locacao, categoria, valorDeCompra, placa, ano);
+  
+        if (veiculoController.adicionarVeiculo(veiculo, modelo.toString())) {
+            JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao cadastrar o veículo!\nVerifique se preencheu todos os campos ou se há campos duplicados.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        }    
+    }
+    
+    private void adicionarMotocicleta(ModeloMotocicleta modelo, Marca marca, Estado estado,
+        Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano) {
+        
+        Veiculo veiculo = new Motocicleta(modelo, marca, estado, locacao, categoria, valorDeCompra, placa, ano);
+  
+        if (veiculoController.adicionarVeiculo(veiculo, modelo.toString())) {
+            JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao cadastrar o veículo!\nVerifique se preencheu todos os campos ou se há campos duplicados.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        }    
+    }
+        
+    private void adicionarVan(ModeloVan modelo, Marca marca, Estado estado,
+        Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano) {
+        
+        Veiculo veiculo = new Van(modelo, marca, estado, locacao, categoria, valorDeCompra, placa, ano);
+
+        if (veiculoController.adicionarVeiculo(veiculo, modelo.toString())) {
+            JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao cadastrar o veículo!\nVerifique se preencheu todos os campos ou se há campos duplicados.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        }    
+    }
+    
+    private void limparForm() {
+        tFAno.setText("");
+        tFPlaca.setText("");
+        tFValorCompra.setText("");
+    }
 }

@@ -4,12 +4,13 @@
  */
 package br.com.locadora.gerenciadorveiculos.view;
 
-import br.com.locadora.gerenciadorveiculos.UIComponents.ClientesTableModel;
+import br.com.locadora.gerenciadorveiculos.components.ClientesTableModel;
 import br.com.locadora.gerenciadorveiculos.controller.ClienteController;
 import br.com.locadora.gerenciadorveiculos.dao.ClienteDAO;
 import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import java.sql.Connection;
+import java.util.List;
 import java.util.Optional;
 import javax.swing.JOptionPane;
 
@@ -379,8 +380,9 @@ public class GerenciarClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_bIncluirClienteActionPerformed
 
     private void bListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarClientesActionPerformed
-       listarClientes();
-       clientesTableModel.fireTableDataChanged();
+        ClientesTableModel.listaClientes.clear();
+        ClientesTableModel.listaClientes = listarClientes();
+        clientesTableModel.fireTableDataChanged();
     }//GEN-LAST:event_bListarClientesActionPerformed
 
     private void bExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExcluirClienteActionPerformed
@@ -504,8 +506,8 @@ public class GerenciarClientes extends javax.swing.JFrame {
         tFEndereco.setText("");
     }
 
-    private void listarClientes() {
-        clienteController.listarClientes();
+    private List<Cliente> listarClientes() {
+        return clienteController.listarClientes();
     }
 
     private void removerCliente(int indice) {
