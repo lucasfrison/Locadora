@@ -168,7 +168,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_mIVenderVeiculosActionPerformed
 
     private void mISairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mISairActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_mISairActionPerformed
 
     /**
