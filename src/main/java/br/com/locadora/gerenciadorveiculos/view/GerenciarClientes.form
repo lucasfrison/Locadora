@@ -164,7 +164,9 @@
     </Container>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="DISPOSE_ON_CLOSE" type="code"/>
+    </Property>
     <Property name="title" type="java.lang.String" value="Gerenciar Clientes"/>
   </Properties>
   <SyntheticProperties>
@@ -430,6 +432,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Voltar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bVoltarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bAtualizarCliente">
       <Properties>

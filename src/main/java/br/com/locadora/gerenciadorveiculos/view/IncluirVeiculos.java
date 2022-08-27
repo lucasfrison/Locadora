@@ -64,10 +64,11 @@ public class IncluirVeiculos extends javax.swing.JFrame {
         cBTipo = new javax.swing.JComboBox(TipoVeiculo.values());
         tFAno = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Incluir Veículos");
         setBounds(new java.awt.Rectangle(0, 0, 655, 300));
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 655, 300));
+        setResizable(false);
 
         pIncluirVeiculos.setMaximumSize(new java.awt.Dimension(650, 300));
 
@@ -266,7 +267,7 @@ public class IncluirVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_cBModeloActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalvarActionPerformed

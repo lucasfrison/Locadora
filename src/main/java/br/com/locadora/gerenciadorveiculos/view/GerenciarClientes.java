@@ -184,7 +184,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Clientes");
 
         lNome.setText("Nome");
@@ -313,6 +313,11 @@ public class GerenciarClientes extends javax.swing.JFrame {
         );
 
         bVoltar.setText("Voltar");
+        bVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVoltarActionPerformed(evt);
+            }
+        });
 
         bAtualizarCliente.setText("Atualizar Cliente");
         bAtualizarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -412,6 +417,10 @@ public class GerenciarClientes extends javax.swing.JFrame {
         dAlterarCliente.setVisible(false);
         bListarClientes.doClick();
     }//GEN-LAST:event_bVoltarEditActionPerformed
+
+    private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_bVoltarActionPerformed
 
     /**
      * @param args the command line arguments

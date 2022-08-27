@@ -39,7 +39,7 @@ public class DevolverVeiculos extends javax.swing.JFrame {
         bDevolverVeiculo = new javax.swing.JButton();
         bVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         bListarVeiculosLocados.setText("Listar");
         bListarVeiculosLocados.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +156,7 @@ public class DevolverVeiculos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        System.out.println("Voltar clicado!");
+        this.setVisible(false);
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bListarVeiculosLocadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarVeiculosLocadosActionPerformed

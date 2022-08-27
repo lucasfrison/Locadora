@@ -47,7 +47,7 @@ public class VenderVeiculos extends javax.swing.JFrame {
         cBMarca = new javax.swing.JComboBox<>();
         lMarca = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vender Veiculos");
         setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
 
@@ -253,7 +253,7 @@ public class VenderVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_bFiltrarActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVenderActionPerformed

@@ -117,7 +117,7 @@ public class AlugarVeiculos extends javax.swing.JFrame {
 
         dConfirmarLocacao.getAccessibleContext().setAccessibleParent(this);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alugar Veículos");
 
         tVeiculosDisponiveis.setModel(new AlugarVeiculosTableModel());
@@ -411,7 +411,7 @@ public class AlugarVeiculos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLocarActionPerformed
