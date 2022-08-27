@@ -4,7 +4,7 @@
  */
 package br.com.locadora.gerenciadorveiculos.view;
 
-import br.com.locadora.gerenciadorveiculos.components.ClientesTableModel;
+import br.com.locadora.gerenciadorveiculos.uicomponents.ClientesTableModel;
 import br.com.locadora.gerenciadorveiculos.controller.ClienteController;
 import br.com.locadora.gerenciadorveiculos.dao.ClienteDAO;
 import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;

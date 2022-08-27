@@ -25,7 +25,12 @@ public class Automovel extends Veiculo {
     
     @Override
     public double getValorDiariaLocacao() {
-        return 0.0;
+        Categoria categoria = getCategoria();
+        switch(categoria) {
+            case LUXO : return 450.00;
+            case INTERMEDIARIO : return 300.00;
+            default: return 100.00;
+        }
     }
     
     

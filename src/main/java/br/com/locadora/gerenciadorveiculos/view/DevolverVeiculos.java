@@ -4,7 +4,7 @@
  */
 package br.com.locadora.gerenciadorveiculos.view;
 
-import br.com.locadora.gerenciadorveiculos.components.DevolverVeiculosTableModel;
+import br.com.locadora.gerenciadorveiculos.uicomponents.DevolverVeiculosTableModel;
 
 /**
  *

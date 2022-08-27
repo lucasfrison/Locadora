@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package br.com.locadora.gerenciadorveiculos.components;
+package br.com.locadora.gerenciadorveiculos.uicomponents;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -10,15 +6,13 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author lucfg
  */
-public class DevolverVeiculosTableModel extends AbstractTableModel{
+public class AlugarVeiculosTableModel extends AbstractTableModel{
     
     private final String[] colunas = {
-        "Nome Cliente", "Placa", "Marca",
-        "Modelo", "Ano", "Data Locação",
-        "Preço Diária", "Dias Locado", "Valor Locação"
+        "Placa", "Marca", "Modelo", "Ano", "Valor da Diária"
     };
 
-    public DevolverVeiculosTableModel() {
+    public AlugarVeiculosTableModel() {
 
     }
     
@@ -41,7 +35,5 @@ public class DevolverVeiculosTableModel extends AbstractTableModel{
     public String getColumnName(int column) {
         return colunas[column]; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
-    
-    
-    
 }
+    

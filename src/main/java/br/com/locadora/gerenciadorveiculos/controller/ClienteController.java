@@ -4,7 +4,7 @@
  */
 package br.com.locadora.gerenciadorveiculos.controller;
 
-import br.com.locadora.gerenciadorveiculos.components.ClientesTableModel;
+import br.com.locadora.gerenciadorveiculos.uicomponents.ClientesTableModel;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import br.com.locadora.gerenciadorveiculos.service.ClienteService;
 import java.util.List;

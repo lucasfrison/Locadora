@@ -10,17 +10,17 @@ import java.util.Calendar;
  *
  * @author lucfg
  */
-public class Veiculo implements IVeiculo {
+public abstract class Veiculo implements IVeiculo {
 
     final private Marca marca;
     private Estado estado;
     private Locacao locacao;
     final private Categoria categoria;
-    private Double valorDeCompra;
+    private double valorDeCompra;
     final private String placa;
-    final private Integer ano;
+    final private int ano;
 
-    public Veiculo(Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano) {
+    public Veiculo(Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano) {
         this.marca = marca;
         this.estado = estado;
         this.locacao = locacao;
@@ -31,7 +31,7 @@ public class Veiculo implements IVeiculo {
     }
 
     @Override
-    public void locar(Integer dias, Calendar data, Cliente cliente) {
+    public void locar(int dias, Calendar data, Cliente cliente) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
@@ -71,18 +71,26 @@ public class Veiculo implements IVeiculo {
     }
 
     @Override
-    public Integer getAno() {
+    public int getAno() {
         return ano;
     }
 
     @Override
-    public double getValorDiariaLocacao() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    public abstract double getValorDiariaLocacao();
 
     @Override
     public double getValorCompra() {
         return valorDeCompra;
+    }
+
+    @Override
+    public double getValorParaVenda() {
+        int idade = Calendar.getInstance().get(Calendar.YEAR) - ano;
+        double valorDeVenda = valorDeCompra - (idade * 0.15) * valorDeCompra;
+        if (valorDeVenda < valorDeCompra * 0.1) {
+            valorDeVenda = valorDeCompra * 0.1;
+        }
+        return valorDeVenda;
     }
     
 }
