@@ -13,5 +13,20 @@ public enum ModeloAutomovel {
     PALIO,
     CELTA,
     CIVIC,
-    C180
+    C180;
+    
+    public static String[] enumsToStringArray() {
+        String[] results = new String[ModeloAutomovel.values().length];
+        int i = 0;
+        for (ModeloAutomovel m : ModeloAutomovel.values()) {
+            results[i] = m.toString();
+            i++;
+        }
+        return results;
+    }
+     
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
