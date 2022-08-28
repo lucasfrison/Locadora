@@ -10,7 +10,7 @@ import br.com.locadora.gerenciadorveiculos.uicomponents.DevolverVeiculosTableMod
  *
  * @author lucfg
  */
-public class DevolverVeiculos extends javax.swing.JFrame {
+public class DevolverVeiculos extends javax.swing.JDialog {
 
     /**
      * Creates new form DevolverVeiculos
@@ -40,6 +40,7 @@ public class DevolverVeiculos extends javax.swing.JFrame {
         bVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModal(true);
 
         bListarVeiculosLocados.setText("Listar");
         bListarVeiculosLocados.addActionListener(new java.awt.event.ActionListener() {
@@ -195,12 +196,12 @@ public class DevolverVeiculos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new DevolverVeiculos().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

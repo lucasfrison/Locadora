@@ -45,8 +45,8 @@ public class ClientesTableModel extends AbstractTableModel{
                 return cliente.getRG();
             case 4:
                 return cliente.getEndereco(); 
-           }
-           return null;
+        }
+        return null;
    }
 
     @Override

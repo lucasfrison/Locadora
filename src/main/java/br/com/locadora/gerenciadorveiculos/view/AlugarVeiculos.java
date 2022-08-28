@@ -10,7 +10,7 @@ import br.com.locadora.gerenciadorveiculos.uicomponents.AlugarVeiculosTableModel
  *
  * @author lucfg
  */
-public class AlugarVeiculos extends javax.swing.JFrame {
+public class AlugarVeiculos extends javax.swing.JDialog {
 
     /**
      * Creates new form AlugarVeiculos
@@ -119,6 +119,7 @@ public class AlugarVeiculos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alugar Veículos");
+        setModal(true);
 
         tVeiculosDisponiveis.setModel(new AlugarVeiculosTableModel());
         sPVeiculosDisponiveis.setViewportView(tVeiculosDisponiveis);
@@ -475,12 +476,12 @@ public class AlugarVeiculos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 AlugarVeiculos alugarVeiculos = new AlugarVeiculos();
                 alugarVeiculos.setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

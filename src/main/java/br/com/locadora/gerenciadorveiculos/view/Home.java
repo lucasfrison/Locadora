@@ -4,6 +4,9 @@
  */
 package br.com.locadora.gerenciadorveiculos.view;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author lucfg
@@ -148,8 +151,8 @@ public class Home extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void mIGerenciarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mIGerenciarClientesActionPerformed
-        GerenciarClientes gerenciarClientes = new GerenciarClientes();
         gerenciarClientes.setVisible(true);
     }//GEN-LAST:event_mIGerenciarClientesActionPerformed
 
@@ -223,4 +226,5 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu mSelecionarTela;
     // End of variables declaration//GEN-END:variables
 
+    
 }

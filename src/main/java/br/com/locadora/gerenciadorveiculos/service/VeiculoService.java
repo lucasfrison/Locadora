@@ -5,7 +5,9 @@
 package br.com.locadora.gerenciadorveiculos.service;
 
 import br.com.locadora.gerenciadorveiculos.dao.VeiculoDAO;
+import br.com.locadora.gerenciadorveiculos.model.TipoVeiculo;
 import br.com.locadora.gerenciadorveiculos.model.Veiculo;
+import java.util.List;
 
 /**
  *
@@ -19,11 +21,11 @@ public class VeiculoService {
         veiculoDAO = new VeiculoDAO();
     }
     
-    public boolean adicionarVeiculo(Veiculo veiculo, String modelo) {
+    public boolean adicionarVeiculo(Veiculo veiculo, String modelo, String tipo) {
         
         if (!validarVeiculo(veiculo)) return false;
         try {
-            veiculoDAO.adicionarVeiculo(veiculo, modelo);
+            veiculoDAO.adicionarVeiculo(veiculo, modelo, tipo);
             return true;
         } catch(Exception e) {
             return false;
@@ -36,5 +38,9 @@ public class VeiculoService {
             && veiculo.getValorCompra() > 3000);
         
         return veiculoValido;
+    }
+
+    public List<Veiculo> listarVeiculosDisponiveis() {
+        return veiculoDAO.listarVeiculosDisponiveis();
     }
 }

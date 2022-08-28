@@ -4,14 +4,20 @@
  */
 package br.com.locadora.gerenciadorveiculos.view;
 
+import br.com.locadora.gerenciadorveiculos.controller.VeiculoController;
+import br.com.locadora.gerenciadorveiculos.model.Marca;
+import br.com.locadora.gerenciadorveiculos.model.Veiculo;
 import br.com.locadora.gerenciadorveiculos.uicomponents.VenderVeiculosTableModel;
+import java.util.List;
 
 /**
  *
  * @author lucfg
  */
-public class VenderVeiculos extends javax.swing.JFrame {
-
+public class VenderVeiculos extends javax.swing.JDialog {
+    
+    private VeiculoController veiculoController = new VeiculoController();
+    private VenderVeiculosTableModel venderVeiculosTableModel = new VenderVeiculosTableModel(listarVeiculosDisponiveis());
     /**
      * Creates new form VenderVeiculos
      */
@@ -28,6 +34,8 @@ public class VenderVeiculos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bGFiltroCategoria = new javax.swing.ButtonGroup();
+        bGFiltroTipo = new javax.swing.ButtonGroup();
         pFiltroTipoVeiculo = new javax.swing.JPanel();
         rBMoto = new javax.swing.JRadioButton();
         rBAutomovel = new javax.swing.JRadioButton();
@@ -44,12 +52,21 @@ public class VenderVeiculos extends javax.swing.JFrame {
         rBPopular = new javax.swing.JRadioButton();
         rBLuxo = new javax.swing.JRadioButton();
         lFiltroCategoria = new javax.swing.JLabel();
-        cBMarca = new javax.swing.JComboBox<>();
+        cBMarca = new javax.swing.JComboBox(Marca.values());
         lMarca = new javax.swing.JLabel();
+
+        bGFiltroCategoria.add(rBPopular);
+        bGFiltroCategoria.add(rBIntermediario);
+        bGFiltroCategoria.add(rBLuxo);
+
+        bGFiltroTipo.add(rBAutomovel);
+        bGFiltroTipo.add(rBMoto);
+        bGFiltroTipo.add(rBVan);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vender Veiculos");
         setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        setModal(true);
 
         pFiltroTipoVeiculo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -93,7 +110,10 @@ public class VenderVeiculos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tVeiculosDisponiveis.setModel(new VenderVeiculosTableModel());
+        sPVeiculosDisponiveis.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        //VenderVeiculosTableModel venderVeiculosTableModel = new VenderVeiculosTableModel(listarVeiculosDisponiveis());
+        tVeiculosDisponiveis.setModel(venderVeiculosTableModel);
         sPVeiculosDisponiveis.setViewportView(tVeiculosDisponiveis);
 
         javax.swing.GroupLayout pVeiculosDisponiveisLayout = new javax.swing.GroupLayout(pVeiculosDisponiveis);
@@ -182,8 +202,6 @@ public class VenderVeiculos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        cBMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lMarca.setText("Marca");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,7 +267,9 @@ public class VenderVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_rBAutomovelActionPerformed
 
     private void bFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFiltrarActionPerformed
-        // TODO add your handling code here:
+        VenderVeiculosTableModel.listaVeiculos.clear();
+        VenderVeiculosTableModel.listaVeiculos = listarVeiculosDisponiveis();
+        venderVeiculosTableModel.fireTableDataChanged();
     }//GEN-LAST:event_bFiltrarActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
@@ -298,17 +318,19 @@ public class VenderVeiculos extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VenderVeiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    
+        //Create and display the form */
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VenderVeiculos().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bFiltrar;
+    private javax.swing.ButtonGroup bGFiltroCategoria;
+    private javax.swing.ButtonGroup bGFiltroTipo;
     private javax.swing.JButton bVender;
     private javax.swing.JButton bVoltar;
     private javax.swing.JComboBox<String> cBMarca;
@@ -327,4 +349,9 @@ public class VenderVeiculos extends javax.swing.JFrame {
     private javax.swing.JScrollPane sPVeiculosDisponiveis;
     private javax.swing.JTable tVeiculosDisponiveis;
     // End of variables declaration//GEN-END:variables
+
+    private List<Veiculo> listarVeiculosDisponiveis() {
+        return veiculoController.listarVeiculosDisponiveis();
+    }
+
 }

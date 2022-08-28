@@ -19,6 +19,7 @@ public class Automovel extends Veiculo {
         this.modelo = modelo;
     }
     
+    @Override
     public ModeloAutomovel getModelo() {
         return modelo;
     }

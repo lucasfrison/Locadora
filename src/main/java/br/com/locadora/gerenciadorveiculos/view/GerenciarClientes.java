@@ -14,10 +14,10 @@ import javax.swing.JOptionPane;
  *
  * @author lucfg
  */
-public class GerenciarClientes extends javax.swing.JFrame {
+public class GerenciarClientes extends javax.swing.JDialog {
     
     private ClienteController clienteController = new ClienteController();
-    private ClientesTableModel clientesTableModel = new ClientesTableModel(clienteController.listarClientes());
+    private ClientesTableModel clientesTableModel = new ClientesTableModel(listarClientes());
     private Cliente clienteTransfer;
     /**
      * Creates new form GerenciarClientes
@@ -182,6 +182,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Clientes");
+        setModal(true);
 
         lNome.setText("Nome");
 
@@ -446,11 +447,11 @@ public class GerenciarClientes extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GerenciarClientes().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

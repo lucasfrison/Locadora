@@ -4,8 +4,10 @@
  */
 package br.com.locadora.gerenciadorveiculos.controller;
 
+import br.com.locadora.gerenciadorveiculos.model.TipoVeiculo;
 import br.com.locadora.gerenciadorveiculos.model.Veiculo;
 import br.com.locadora.gerenciadorveiculos.service.VeiculoService;
+import java.util.List;
 
 /**
  *
@@ -19,13 +21,12 @@ public class VeiculoController {
         veiculoService = new VeiculoService();
     }
     
-    public boolean adicionarVeiculo(Veiculo veiculo, String modelo) {
-        boolean sucesso = veiculoService.adicionarVeiculo(veiculo, modelo);
-        /*if (sucesso) {
-            ClientesTableModel.listaClientes.add(cliente);
-        }*/
+    public boolean adicionarVeiculo(Veiculo veiculo, String modelo, String tipo) {
+        boolean sucesso = veiculoService.adicionarVeiculo(veiculo, modelo, tipo);
         return sucesso;
     }
     
-    
+    public List<Veiculo> listarVeiculosDisponiveis() {
+        return veiculoService.listarVeiculosDisponiveis();
+    }
 }

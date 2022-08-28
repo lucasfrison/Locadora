@@ -19,6 +19,7 @@ public class Van extends Veiculo {
         this.modelo = modelo;
     }
     
+    @Override
     public ModeloVan getModelo() {
         return modelo;
     }

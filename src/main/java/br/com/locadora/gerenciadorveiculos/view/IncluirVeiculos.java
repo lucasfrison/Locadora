@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  *
  * @author lucfg
  */
-public class IncluirVeiculos extends javax.swing.JFrame {
+public class IncluirVeiculos extends javax.swing.JDialog {
 
     private VeiculoController veiculoController = new VeiculoController();
     /**
@@ -66,7 +66,7 @@ public class IncluirVeiculos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Incluir Veículos");
         setBounds(new java.awt.Rectangle(0, 0, 655, 300));
-        setMaximizedBounds(new java.awt.Rectangle(0, 0, 655, 300));
+        setModal(true);
         setResizable(false);
 
         pIncluirVeiculos.setMaximumSize(new java.awt.Dimension(650, 300));
@@ -274,15 +274,15 @@ public class IncluirVeiculos extends javax.swing.JFrame {
             if (TipoVeiculo.AUTOMOVEL.equals(cBTipo.getSelectedItem())) {
                 adicionarAutomovel((ModeloAutomovel)cBModelo.getSelectedItem(), (Marca)cBMarca.getSelectedItem(), (Estado)cBEstado.getSelectedItem(), 
                     null, (Categoria)cBCategoria.getSelectedItem(), Double.parseDouble(tFValorCompra.getText()), tFPlaca.getText(), 
-                    Integer.parseInt(tFAno.getText()));
+                    Integer.parseInt(tFAno.getText()), (TipoVeiculo)cBTipo.getSelectedItem());
             } else if (TipoVeiculo.MOTOCICLETA.equals(cBTipo.getSelectedItem())) {
                 adicionarMotocicleta((ModeloMotocicleta)cBModelo.getSelectedItem(), (Marca)cBMarca.getSelectedItem(), (Estado)cBEstado.getSelectedItem(), 
                     null, (Categoria)cBCategoria.getSelectedItem(), Double.parseDouble(tFValorCompra.getText()), tFPlaca.getText(), 
-                    Integer.parseInt(tFAno.getText()));
+                    Integer.parseInt(tFAno.getText()), (TipoVeiculo)cBTipo.getSelectedItem());
             } else {    
                 adicionarVan((ModeloVan)cBModelo.getSelectedItem(), (Marca)cBMarca.getSelectedItem(), (Estado)cBEstado.getSelectedItem(), 
                     null, (Categoria)cBCategoria.getSelectedItem(), Double.parseDouble(tFValorCompra.getText()), tFPlaca.getText(), 
-                    Integer.parseInt(tFAno.getText()));
+                    Integer.parseInt(tFAno.getText()), (TipoVeiculo)cBTipo.getSelectedItem());
             }
             limparForm();
         } catch (NumberFormatException e) {
@@ -330,11 +330,11 @@ public class IncluirVeiculos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IncluirVeiculos().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -360,11 +360,11 @@ public class IncluirVeiculos extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void adicionarAutomovel(ModeloAutomovel modelo, Marca marca, Estado estado,
-        Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano) {
+        Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano, TipoVeiculo tipo) {
         
         Veiculo veiculo = new Automovel(modelo, marca, estado, locacao, categoria, valorDeCompra, placa, ano);
   
-        if (veiculoController.adicionarVeiculo(veiculo, modelo.toString())) {
+        if (veiculoController.adicionarVeiculo(veiculo, modelo.toString(), tipo.toString())) {
             JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!",
                     "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -375,11 +375,11 @@ public class IncluirVeiculos extends javax.swing.JFrame {
     }
     
     private void adicionarMotocicleta(ModeloMotocicleta modelo, Marca marca, Estado estado,
-        Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano) {
+        Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano, TipoVeiculo tipo) {
         
         Veiculo veiculo = new Motocicleta(modelo, marca, estado, locacao, categoria, valorDeCompra, placa, ano);
   
-        if (veiculoController.adicionarVeiculo(veiculo, modelo.toString())) {
+        if (veiculoController.adicionarVeiculo(veiculo, modelo.toString(), tipo.toString())) {
             JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!",
                     "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -390,11 +390,11 @@ public class IncluirVeiculos extends javax.swing.JFrame {
     }
         
     private void adicionarVan(ModeloVan modelo, Marca marca, Estado estado,
-        Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano) {
+        Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano, TipoVeiculo tipo) {
         
         Veiculo veiculo = new Van(modelo, marca, estado, locacao, categoria, valorDeCompra, placa, ano);
 
-        if (veiculoController.adicionarVeiculo(veiculo, modelo.toString())) {
+        if (veiculoController.adicionarVeiculo(veiculo, modelo.toString(), tipo.toString())) {
             JOptionPane.showMessageDialog(null, "Veículo cadastrado com sucesso!",
                     "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         } else {

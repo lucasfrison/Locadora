@@ -86,11 +86,13 @@ public abstract class Veiculo implements IVeiculo {
     @Override
     public double getValorParaVenda() {
         int idade = Calendar.getInstance().get(Calendar.YEAR) - ano;
-        double valorDeVenda = valorDeCompra - (idade * 0.15) * valorDeCompra;
+        double valorDeVenda = valorDeCompra - idade * 0.15 * valorDeCompra;
         if (valorDeVenda < valorDeCompra * 0.1) {
             valorDeVenda = valorDeCompra * 0.1;
         }
         return valorDeVenda;
     }
+    
+    public abstract Object getModelo();
     
 }
