@@ -19,9 +19,15 @@ import java.util.List;
  * @author lucfg
  */
 public class ClienteDAO {
+    
+    ConnectionFactory connectionFactory;
+
+    public ClienteDAO() {
+        connectionFactory = new ConnectionFactory();
+    }
 
     public void adicionarCliente(Cliente cliente) {
-        try (Connection connection = new ConnectionFactory().getConexao()) {
+        try (Connection connection = connectionFactory.getConexao()) {
             String sql = "INSERT INTO CLIENTE (NOME, SOBRENOME, RG, CPF, ENDERECO) VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -39,21 +45,23 @@ public class ClienteDAO {
     
     public List<Cliente> listarClientes() {
 	List<Cliente> clientes = new ArrayList<>();
-	try (Connection connection = new ConnectionFactory().getConexao()){
+	try (Connection connection = connectionFactory.getConexao()){
             String sql = "SELECT NOME, SOBRENOME, RG, CPF, ENDERECO FROM CLIENTE";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
                 pstm.execute();
 		popularListaClientes(clientes, pstm);
             }
+            
             return clientes;
+            
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
     
     public void removerCliente(Cliente cliente) {
-        try (Connection connection = new ConnectionFactory().getConexao()) {
+        try (Connection connection = connectionFactory.getConexao()) {
             try (PreparedStatement stm = connection.prepareStatement("DELETE FROM CLIENTE WHERE CPF = ?")) {
                 stm.setString(1, cliente.getCPF());
                 stm.execute();
@@ -64,7 +72,7 @@ public class ClienteDAO {
     }
     
     public void alterarCliente(Cliente cliente) {
-        try (Connection connection = new ConnectionFactory().getConexao()) {
+        try (Connection connection = connectionFactory.getConexao()) {
             try (PreparedStatement stm = connection
                 .prepareStatement("UPDATE CLIENTE C SET C.NOME = ?, C.SOBRENOME = ?, C.RG = ?, C.ENDERECO = ? WHERE CPF = ?")) {
                 stm.setString(1, cliente.getNome());

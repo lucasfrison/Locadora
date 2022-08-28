@@ -10,11 +10,11 @@ package br.com.locadora.gerenciadorveiculos.view;
  */
 public class Home extends javax.swing.JFrame {
     
-    GerenciarClientes gerenciarClientes = new GerenciarClientes();
-    AlugarVeiculos alugarVeiculos = new AlugarVeiculos();
-    DevolverVeiculos devolverVeiculos = new DevolverVeiculos();
-    IncluirVeiculos incluirVeiculos = new IncluirVeiculos();
-    VenderVeiculos venderVeiculos = new VenderVeiculos();
+    private GerenciarClientes gerenciarClientes = new GerenciarClientes();
+    private AlugarVeiculos alugarVeiculos = new AlugarVeiculos();
+    private DevolverVeiculos devolverVeiculos = new DevolverVeiculos();
+    private IncluirVeiculos incluirVeiculos = new IncluirVeiculos();
+    private VenderVeiculos venderVeiculos = new VenderVeiculos();
 
     /**
      * Creates new form Home

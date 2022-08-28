@@ -17,9 +17,15 @@ import java.sql.Statement;
  * @author lucfg
  */
 public class VeiculoDAO {
+    
+    ConnectionFactory connectionFactory;
+
+    public VeiculoDAO() {
+        connectionFactory = new ConnectionFactory();
+    }
 
     public void adicionarVeiculo(Veiculo veiculo, String modelo) {
-        try (Connection connection = new ConnectionFactory().getConexao()){
+        try (Connection connection = connectionFactory.getConexao()){
             String sql = 
                     "INSERT INTO VEICULO (PLACA, MARCA, ESTADO, CATEGORIA, MODELO, VALOR_COMPRA, ANO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 

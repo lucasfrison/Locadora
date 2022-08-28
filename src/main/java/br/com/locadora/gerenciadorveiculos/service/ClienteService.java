@@ -5,10 +5,7 @@
 package br.com.locadora.gerenciadorveiculos.service;
 
 import br.com.locadora.gerenciadorveiculos.dao.ClienteDAO;
-import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
