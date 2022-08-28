@@ -6,12 +6,8 @@ package br.com.locadora.gerenciadorveiculos.view;
 
 import br.com.locadora.gerenciadorveiculos.uicomponents.ClientesTableModel;
 import br.com.locadora.gerenciadorveiculos.controller.ClienteController;
-import br.com.locadora.gerenciadorveiculos.dao.ClienteDAO;
-import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
-import java.sql.Connection;
 import java.util.List;
-import java.util.Optional;
 import javax.swing.JOptionPane;
 
 /**
@@ -419,7 +415,7 @@ public class GerenciarClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_bVoltarEditActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_bVoltarActionPerformed
 
     /**

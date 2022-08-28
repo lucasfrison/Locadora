@@ -156,7 +156,7 @@ public class DevolverVeiculos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bListarVeiculosLocadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarVeiculosLocadosActionPerformed

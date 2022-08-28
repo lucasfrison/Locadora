@@ -253,7 +253,7 @@ public class VenderVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_bFiltrarActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVenderActionPerformed

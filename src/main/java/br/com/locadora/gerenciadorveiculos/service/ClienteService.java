@@ -5,7 +5,6 @@
 package br.com.locadora.gerenciadorveiculos.service;
 
 import br.com.locadora.gerenciadorveiculos.dao.ClienteDAO;
-import br.com.locadora.gerenciadorveiculos.factory.ClienteDAOFactory;
 import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import java.sql.Connection;
@@ -18,12 +17,10 @@ import java.util.List;
  */
 public class ClienteService {
     
-    private ClienteDAOFactory clienteDAOFactory;
     private ClienteDAO clienteDAO;
     
     public ClienteService() {
-        clienteDAOFactory = new ClienteDAOFactory();
-        clienteDAO = clienteDAOFactory.getDAO();
+        clienteDAO = new ClienteDAO();
     }
     
     public boolean adicionarCliente(Cliente cliente) {

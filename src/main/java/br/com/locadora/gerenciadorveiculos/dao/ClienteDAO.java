@@ -4,6 +4,7 @@
  */
 package br.com.locadora.gerenciadorveiculos.dao;
 
+import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,14 +19,9 @@ import java.util.List;
  * @author lucfg
  */
 public class ClienteDAO {
-    private Connection connection;
-
-    public ClienteDAO(Connection connection) {
-	this.connection = connection;
-    }
 
     public void adicionarCliente(Cliente cliente) {
-        try {
+        try (Connection connection = new ConnectionFactory().getConexao()) {
             String sql = "INSERT INTO CLIENTE (NOME, SOBRENOME, RG, CPF, ENDERECO) VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -43,7 +39,7 @@ public class ClienteDAO {
     
     public List<Cliente> listarClientes() {
 	List<Cliente> clientes = new ArrayList<>();
-	try {
+	try (Connection connection = new ConnectionFactory().getConexao()){
             String sql = "SELECT NOME, SOBRENOME, RG, CPF, ENDERECO FROM CLIENTE";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
@@ -57,23 +53,27 @@ public class ClienteDAO {
     }
     
     public void removerCliente(Cliente cliente) {
-        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM CLIENTE WHERE CPF = ?")) {
-            stm.setString(1, cliente.getCPF());
-            stm.execute();
+        try (Connection connection = new ConnectionFactory().getConexao()) {
+            try (PreparedStatement stm = connection.prepareStatement("DELETE FROM CLIENTE WHERE CPF = ?")) {
+                stm.setString(1, cliente.getCPF());
+                stm.execute();
+            }    
 	} catch (SQLException e) {
             throw new RuntimeException(e);
 	}
     }
     
     public void alterarCliente(Cliente cliente) {
-	try (PreparedStatement stm = connection
-            .prepareStatement("UPDATE CLIENTE C SET C.NOME = ?, C.SOBRENOME = ?, C.RG = ?, C.ENDERECO = ? WHERE CPF = ?")) {
-            stm.setString(1, cliente.getNome());
-            stm.setString(2, cliente.getSobrenome());
-            stm.setString(3, cliente.getRG());
-            stm.setString(4, cliente.getEndereco());
-            stm.setString(5, cliente.getCPF());
-            stm.execute();
+        try (Connection connection = new ConnectionFactory().getConexao()) {
+            try (PreparedStatement stm = connection
+                .prepareStatement("UPDATE CLIENTE C SET C.NOME = ?, C.SOBRENOME = ?, C.RG = ?, C.ENDERECO = ? WHERE CPF = ?")) {
+                stm.setString(1, cliente.getNome());
+                stm.setString(2, cliente.getSobrenome());
+                stm.setString(3, cliente.getRG());
+                stm.setString(4, cliente.getEndereco());
+                stm.setString(5, cliente.getCPF());
+                stm.execute();
+            }    
 	} catch (SQLException e) {
             throw new RuntimeException(e);
 	}

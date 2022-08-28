@@ -4,6 +4,7 @@
  */
 package br.com.locadora.gerenciadorveiculos.dao;
 
+import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;
 import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import br.com.locadora.gerenciadorveiculos.model.Veiculo;
 import java.sql.Connection;
@@ -16,15 +17,9 @@ import java.sql.Statement;
  * @author lucfg
  */
 public class VeiculoDAO {
-    
-    private Connection connection;
-
-    public VeiculoDAO(Connection connection) {
-	this.connection = connection;
-    }
 
     public void adicionarVeiculo(Veiculo veiculo, String modelo) {
-        try {
+        try (Connection connection = new ConnectionFactory().getConexao()){
             String sql = 
                     "INSERT INTO VEICULO (PLACA, MARCA, ESTADO, CATEGORIA, MODELO, VALOR_COMPRA, ANO) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -38,6 +33,7 @@ public class VeiculoDAO {
                 pstm.setInt(7, veiculo.getAno());
                 pstm.execute();
             }
+            
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -5,8 +5,9 @@
 package br.com.locadora.gerenciadorveiculos.service;
 
 import br.com.locadora.gerenciadorveiculos.dao.VeiculoDAO;
-import br.com.locadora.gerenciadorveiculos.factory.VeiculoDAOFactory;
+import br.com.locadora.gerenciadorveiculos.factory.ConnectionFactory;
 import br.com.locadora.gerenciadorveiculos.model.Veiculo;
+import java.sql.Connection;
 
 /**
  *
@@ -14,12 +15,10 @@ import br.com.locadora.gerenciadorveiculos.model.Veiculo;
  */
 public class VeiculoService {
        
-    private VeiculoDAOFactory veiculoDAOFactory;
     private VeiculoDAO veiculoDAO;
     
     public VeiculoService() {
-        veiculoDAOFactory = new VeiculoDAOFactory();
-        veiculoDAO = veiculoDAOFactory.getDAO();
+        veiculoDAO = new VeiculoDAO();
     }
     
     public boolean adicionarVeiculo(Veiculo veiculo, String modelo) {

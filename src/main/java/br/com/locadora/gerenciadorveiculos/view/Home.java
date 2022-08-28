@@ -44,6 +44,7 @@ public class Home extends javax.swing.JFrame {
         mIVenderVeiculos = new javax.swing.JMenuItem();
         mISair = new javax.swing.JMenuItem();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Página Inicial");
         setMaximumSize(new java.awt.Dimension(840, 275));
         setResizable(false);
@@ -148,6 +149,7 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mIGerenciarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mIGerenciarClientesActionPerformed
+        GerenciarClientes gerenciarClientes = new GerenciarClientes();
         gerenciarClientes.setVisible(true);
     }//GEN-LAST:event_mIGerenciarClientesActionPerformed
 
@@ -169,6 +171,7 @@ public class Home extends javax.swing.JFrame {
 
     private void mISairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mISairActionPerformed
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_mISairActionPerformed
 
     /**

@@ -7,7 +7,6 @@ package br.com.locadora.gerenciadorveiculos.view;
 import br.com.locadora.gerenciadorveiculos.controller.VeiculoController;
 import br.com.locadora.gerenciadorveiculos.model.Automovel;
 import br.com.locadora.gerenciadorveiculos.model.Categoria;
-import br.com.locadora.gerenciadorveiculos.model.Cliente;
 import br.com.locadora.gerenciadorveiculos.model.Estado;
 import br.com.locadora.gerenciadorveiculos.model.Locacao;
 import br.com.locadora.gerenciadorveiculos.model.Marca;
@@ -267,7 +266,7 @@ public class IncluirVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_cBModeloActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalvarActionPerformed

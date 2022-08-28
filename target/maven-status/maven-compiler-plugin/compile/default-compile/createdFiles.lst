@@ -3,7 +3,6 @@ br\com\locadora\gerenciadorveiculos\view\Home$6.class
 br\com\locadora\gerenciadorveiculos\service\ClienteService.class
 br\com\locadora\gerenciadorveiculos\view\GerenciarClientes$9.class
 br\com\locadora\gerenciadorveiculos\view\VenderVeiculos$6.class
-br\com\locadora\gerenciadorveiculos\factory\VeiculoDAOFactory.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos$9.class
 br\com\locadora\gerenciadorveiculos\view\DevolverVeiculos$2.class
 br\com\locadora\gerenciadorveiculos\controller\ClienteController.class
@@ -61,7 +60,6 @@ br\com\locadora\gerenciadorveiculos\model\Van.class
 br\com\locadora\gerenciadorveiculos\uicomponents\ClientesTableModel.class
 br\com\locadora\gerenciadorveiculos\view\IncluirVeiculos.class
 br\com\locadora\gerenciadorveiculos\view\AlugarVeiculos.class
-br\com\locadora\gerenciadorveiculos\factory\ClienteDAOFactory.class
 br\com\locadora\gerenciadorveiculos\model\IVeiculo.class
 br\com\locadora\gerenciadorveiculos\view\GerenciarClientes.class
 br\com\locadora\gerenciadorveiculos\model\Automovel.class
