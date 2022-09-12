@@ -4,14 +4,22 @@
  */
 package br.com.locadora.gerenciadorveiculos.view;
 
-import br.com.locadora.gerenciadorveiculos.UIComponents.DevolverVeiculosTableModel;
+import br.com.locadora.gerenciadorveiculos.controller.VeiculoController;
+import br.com.locadora.gerenciadorveiculos.model.Veiculo;
+import br.com.locadora.gerenciadorveiculos.uicomponents.DevolverVeiculosTableModel;
+import br.com.locadora.gerenciadorveiculos.uicomponents.VenderVeiculosTableModel;
+import java.text.ParseException;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author lucfg
  */
-public class DevolverVeiculos extends javax.swing.JFrame {
+public class DevolverVeiculos extends javax.swing.JDialog {
 
+    VeiculoController veiculoController = new VeiculoController();
+    DevolverVeiculosTableModel devolverVeiculosTableModel = new DevolverVeiculosTableModel(listarVeiculosAlugados());
     /**
      * Creates new form DevolverVeiculos
      */
@@ -39,7 +47,8 @@ public class DevolverVeiculos extends javax.swing.JFrame {
         bDevolverVeiculo = new javax.swing.JButton();
         bVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModal(true);
 
         bListarVeiculosLocados.setText("Listar");
         bListarVeiculosLocados.addActionListener(new java.awt.event.ActionListener() {
@@ -70,8 +79,9 @@ public class DevolverVeiculos extends javax.swing.JFrame {
                 .addComponent(lVeiculosLocados))
         );
 
-        DevolverVeiculosTableModel veiculosTabela = new DevolverVeiculosTableModel();
-        tVeiculosLocados.setModel(veiculosTabela);
+        sPVeiculos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        tVeiculosLocados.setModel(devolverVeiculosTableModel);
         sPVeiculos.setViewportView(tVeiculosLocados);
 
         bDevolverVeiculo.setText("Devolver Veículo");
@@ -114,7 +124,7 @@ public class DevolverVeiculos extends javax.swing.JFrame {
             .addGroup(pContainerTableLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pContainerTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sPVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
+                    .addComponent(sPVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pContainerTableLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(pContainerBottom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -151,20 +161,26 @@ public class DevolverVeiculos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(808, 497));
+        setSize(new java.awt.Dimension(872, 497));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        System.out.println("Voltar clicado!");
+        this.dispose();
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bListarVeiculosLocadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarVeiculosLocadosActionPerformed
-         System.out.println("Listar clicado!");
+        DevolverVeiculosTableModel.listaDeVeiculos.clear();
+        DevolverVeiculosTableModel.listaDeVeiculos = listarVeiculosAlugados();
+        devolverVeiculosTableModel.fireTableDataChanged();
     }//GEN-LAST:event_bListarVeiculosLocadosActionPerformed
 
     private void bDevolverVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDevolverVeiculoActionPerformed
-         System.out.println("Devolver clicado!");
+        int linha = tVeiculosLocados.getSelectedRow();
+        if (linha >= 0) {
+            devolverVeiculo(linha);
+        }
+        bListarVeiculosLocados.doClick();
     }//GEN-LAST:event_bDevolverVeiculoActionPerformed
 
     /**
@@ -195,12 +211,12 @@ public class DevolverVeiculos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new DevolverVeiculos().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -214,5 +230,25 @@ public class DevolverVeiculos extends javax.swing.JFrame {
     private javax.swing.JScrollPane sPVeiculos;
     private javax.swing.JTable tVeiculosLocados;
     // End of variables declaration//GEN-END:variables
+
+    private List<Veiculo> listarVeiculosAlugados(){
+        try {
+            return veiculoController.listarVeiculosAlugados();
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    private void devolverVeiculo(int linha) {
+        Veiculo veiculo = DevolverVeiculosTableModel.listaDeVeiculos.get(linha);
+        if (veiculoController.devolverVeiculo(veiculo)) {
+            JOptionPane.showMessageDialog(null, "Veículo devolvido com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao devolver o veículo!\n Nenhum veiculo foi selecionado.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 
 }

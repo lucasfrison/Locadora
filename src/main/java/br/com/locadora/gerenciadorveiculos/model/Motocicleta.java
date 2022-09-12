@@ -19,13 +19,19 @@ public class Motocicleta extends Veiculo {
         this.modelo = modelo;
     }
     
-    public ModeloMotocicleta getMpdelo() {
+    @Override
+    public ModeloMotocicleta getModelo() {
         return modelo;
     }
     
     @Override
     public double getValorDiariaLocacao() {
-        return 0.0;
+        Categoria categoria = getCategoria();
+        switch(categoria) {
+            case LUXO : return 450.00;
+            case INTERMEDIARIO : return 350.00;
+            default: return 70.00;
+        }
     }
     
 }

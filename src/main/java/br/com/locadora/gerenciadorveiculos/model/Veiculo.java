@@ -10,17 +10,17 @@ import java.util.Calendar;
  *
  * @author lucfg
  */
-public class Veiculo implements IVeiculo {
+public abstract class Veiculo implements IVeiculo {
 
     final private Marca marca;
     private Estado estado;
     private Locacao locacao;
     final private Categoria categoria;
-    private Double valorDeCompra;
+    private double valorDeCompra;
     final private String placa;
-    final private Integer ano;
+    final private int ano;
 
-    public Veiculo(Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano) {
+    public Veiculo(Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano) {
         this.marca = marca;
         this.estado = estado;
         this.locacao = locacao;
@@ -31,53 +31,70 @@ public class Veiculo implements IVeiculo {
     }
 
     @Override
-    public void locar(Integer dias, Calendar data, Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public void locar(int dias, double valor, Calendar data, Cliente cliente) {
+        estado = Estado.LOCADO;
+        locacao = new Locacao(dias, valor, data, cliente);
     }
 
     @Override
     public void vender() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        estado = Estado.VENDIDO;
     }
 
     @Override
     public void devolver() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        locacao = null;
+        estado = Estado.DISPONIVEL;
     }
 
     @Override
     public Estado getEstado() {
-        throw new UnsupportedOperationException("Not supported yet.");    
+        return estado;    
     }
 
     @Override
     public Marca getMarca() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return marca;
     }
 
     @Override
     public Categoria getCategoria() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return categoria;
     }
 
     @Override
     public Locacao getLocacao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return locacao;
     }
 
     @Override
     public String getPlaca() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return placa;
     }
 
     @Override
-    public Integer getAno() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int getAno() {
+        return ano;
     }
 
     @Override
-    public double getValorDiariaLocacao() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public abstract double getValorDiariaLocacao();
+
+    @Override
+    public double getValorCompra() {
+        return valorDeCompra;
     }
+
+    @Override
+    public double getValorParaVenda() {
+        int idade = Calendar.getInstance().get(Calendar.YEAR) - ano;
+        double valorDeVenda = valorDeCompra - idade * 0.15 * valorDeCompra;
+        if (valorDeVenda < valorDeCompra * 0.1) {
+            valorDeVenda = valorDeCompra * 0.1;
+        }
+        return valorDeVenda;
+    }
+    
+    public abstract Object getModelo();
     
 }

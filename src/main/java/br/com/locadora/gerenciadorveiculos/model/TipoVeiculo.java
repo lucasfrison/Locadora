@@ -8,10 +8,8 @@ package br.com.locadora.gerenciadorveiculos.model;
  *
  * @author lucfg
  */
-public enum ModeloAutomovel {
-    GOL,
-    PALIO,
-    CELTA,
-    CIVIC,
-    C180 
+public enum TipoVeiculo {
+    AUTOMOVEL,
+    MOTOCICLETA,
+    VAN
 }

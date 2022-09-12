@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="bGFiltroCategoria">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.ButtonGroup()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="bGFiltroCategoria.add(rBPopular);&#xa;bGFiltroCategoria.add(rBIntermediario);&#xa;bGFiltroCategoria.add(rBLuxo);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="bGFiltroTipo">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.ButtonGroup()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="bGFiltroTipo.add(rBAutomovel);&#xa;bGFiltroTipo.add(rBMoto);&#xa;bGFiltroTipo.add(rBVan);"/>
+      </AuxValues>
+    </Component>
+  </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Vender Veiculos"/>
     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
       <Font name="Arial" size="24" style="0"/>
     </Property>
+    <Property name="modal" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,23,0,0,3,39"/>
@@ -55,6 +70,8 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="bFiltrar" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Component id="bListarTodos" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -64,7 +81,7 @@
                           </Group>
                           <Component id="pFiltroTipoVeiculo" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="248" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -84,6 +101,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="bFiltrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cBMarca" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bListarTodos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="pVeiculosDisponiveis" max="32767" attributes="0"/>
@@ -141,6 +159,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Motocicleta"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JRadioButton()"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rBMoto.setActionCommand(&quot;MOTOCICLETA&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBAutomovel">
           <Properties>
@@ -149,11 +171,19 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBAutomovelActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JRadioButton()"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rBAutomovel.setActionCommand(&quot;AUTOMOVEL&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBVan">
           <Properties>
             <Property name="text" type="java.lang.String" value="Van"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JRadioButton()"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rBVan.setActionCommand(&quot;VAN&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lFiltroTipo">
           <Properties>
@@ -181,13 +211,20 @@
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JScrollPane" name="sPVeiculosDisponiveis">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder/>
+              </Border>
+            </Property>
+          </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
             <Component class="javax.swing.JTable" name="tVeiculosDisponiveis">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new VenderVeiculosTableModel()" type="code"/>
+                  <Connection code="venderVeiculosTableModel" type="code"/>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
@@ -196,6 +233,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="//VenderVeiculosTableModel venderVeiculosTableModel = new VenderVeiculosTableModel(listarVeiculosDisponiveis());"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -266,19 +306,31 @@
       <SubComponents>
         <Component class="javax.swing.JRadioButton" name="rBIntermediario">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Intermedi&#xe1;rio"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;Intermedi&#xe1;rio&quot;" type="code"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBIntermediarioActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JRadioButton()"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rBIntermediario.setActionCommand(&quot;INTERMEDIARIO&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBPopular">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Popular"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;Popular&quot;" type="code"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBPopularActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JRadioButton()"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rBPopular.setActionCommand(&quot;POPULAR&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBLuxo">
           <Properties>
@@ -287,6 +339,10 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBLuxoActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JRadioButton()"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="rBLuxo.setActionCommand(&quot;LUXO&quot;);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lFiltroCategoria">
           <Properties>
@@ -296,17 +352,8 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JComboBox" name="cBMarca">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
-      </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(Marca.values())"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
@@ -314,6 +361,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Marca"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="bListarTodos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Listar Todos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bListarTodosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

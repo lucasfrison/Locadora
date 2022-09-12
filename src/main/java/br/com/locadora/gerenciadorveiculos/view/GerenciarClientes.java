@@ -4,14 +4,21 @@
  */
 package br.com.locadora.gerenciadorveiculos.view;
 
-import br.com.locadora.gerenciadorveiculos.UIComponents.ClientesTableModel;
+import br.com.locadora.gerenciadorveiculos.uicomponents.ClientesTableModel;
+import br.com.locadora.gerenciadorveiculos.controller.ClienteController;
+import br.com.locadora.gerenciadorveiculos.model.Cliente;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author lucfg
  */
-public class GerenciarClientes extends javax.swing.JFrame {
-
+public class GerenciarClientes extends javax.swing.JDialog {
+    
+    private ClienteController clienteController = new ClienteController();
+    private ClientesTableModel clientesTableModel = new ClientesTableModel(listarClientes());
+    private Cliente clienteTransfer;
     /**
      * Creates new form GerenciarClientes
      */
@@ -28,6 +35,19 @@ public class GerenciarClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dAlterarCliente = new javax.swing.JDialog();
+        lNomeEdit = new javax.swing.JLabel();
+        tFNomeEdit = new javax.swing.JTextField();
+        lSobrenomeEdit = new javax.swing.JLabel();
+        tFSobrenomeEdit = new javax.swing.JTextField();
+        lCPFEdit = new javax.swing.JLabel();
+        tFCPFEdit = new javax.swing.JFormattedTextField();
+        lRGEdit = new javax.swing.JLabel();
+        tFRGEdit = new javax.swing.JFormattedTextField();
+        tFEnderecoEdit = new javax.swing.JTextField();
+        lEnderecoEdit = new javax.swing.JLabel();
+        bConfirmarAlteracao = new javax.swing.JButton();
+        bVoltarEdit = new javax.swing.JButton();
         pCadastroCliente = new javax.swing.JPanel();
         lNome = new javax.swing.JLabel();
         tFNome = new javax.swing.JTextField();
@@ -48,8 +68,121 @@ public class GerenciarClientes extends javax.swing.JFrame {
         bAtualizarCliente = new javax.swing.JButton();
         bExcluirCliente = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        dAlterarCliente.setTitle("Alterar Cliente");
+        dAlterarCliente.setModal(true);
+        dAlterarCliente.setSize(new java.awt.Dimension(617, 281));
+
+        lNomeEdit.setText("Nome");
+
+        tFNomeEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tFNomeEditActionPerformed(evt);
+            }
+        });
+
+        lSobrenomeEdit.setText("Sobrenome");
+
+        lCPFEdit.setText("CPF");
+
+        tFCPFEdit.setEditable(false);
+        try {
+            tFCPFEdit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        lRGEdit.setText("RG");
+
+        try {
+            tFRGEdit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        lEnderecoEdit.setText("Endereço");
+
+        bConfirmarAlteracao.setText("Confirmar");
+        bConfirmarAlteracao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConfirmarAlteracaoActionPerformed(evt);
+            }
+        });
+
+        bVoltarEdit.setText("Voltar");
+        bVoltarEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVoltarEditActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dAlterarClienteLayout = new javax.swing.GroupLayout(dAlterarCliente.getContentPane());
+        dAlterarCliente.getContentPane().setLayout(dAlterarClienteLayout);
+        dAlterarClienteLayout.setHorizontalGroup(
+            dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dAlterarClienteLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dAlterarClienteLayout.createSequentialGroup()
+                        .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lCPFEdit)
+                            .addComponent(lEnderecoEdit)
+                            .addComponent(tFCPFEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lRGEdit)
+                            .addComponent(tFRGEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(dAlterarClienteLayout.createSequentialGroup()
+                        .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(dAlterarClienteLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(bConfirmarAlteracao)
+                                .addGap(18, 18, 18)
+                                .addComponent(bVoltarEdit))
+                            .addComponent(tFEnderecoEdit, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dAlterarClienteLayout.createSequentialGroup()
+                                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lNomeEdit)
+                                    .addComponent(tFNomeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lSobrenomeEdit)
+                                    .addComponent(tFSobrenomeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(23, 23, 23))))
+        );
+        dAlterarClienteLayout.setVerticalGroup(
+            dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dAlterarClienteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lSobrenomeEdit)
+                    .addComponent(lNomeEdit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tFNomeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tFSobrenomeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lCPFEdit)
+                    .addComponent(lRGEdit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tFCPFEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tFRGEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addComponent(lEnderecoEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tFEnderecoEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(dAlterarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bConfirmarAlteracao)
+                    .addComponent(bVoltarEdit))
+                .addGap(20, 20, 20))
+        );
+
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Clientes");
+        setModal(true);
 
         lNome.setText("Nome");
 
@@ -80,8 +213,18 @@ public class GerenciarClientes extends javax.swing.JFrame {
         }
 
         bIncluirCliente.setText("Incluir Cliente");
+        bIncluirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bIncluirClienteActionPerformed(evt);
+            }
+        });
 
         bListarClientes.setText("Listar Clientes");
+        bListarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bListarClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pCadastroClienteLayout = new javax.swing.GroupLayout(pCadastroCliente);
         pCadastroCliente.setLayout(pCadastroClienteLayout);
@@ -148,7 +291,9 @@ public class GerenciarClientes extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        tClientes.setModel(new ClientesTableModel());
+        sPTabelaClientes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        tClientes.setModel(clientesTableModel);
         sPTabelaClientes.setViewportView(tClientes);
 
         javax.swing.GroupLayout pTabelaClientesLayout = new javax.swing.GroupLayout(pTabelaClientes);
@@ -165,10 +310,25 @@ public class GerenciarClientes extends javax.swing.JFrame {
         );
 
         bVoltar.setText("Voltar");
+        bVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVoltarActionPerformed(evt);
+            }
+        });
 
         bAtualizarCliente.setText("Atualizar Cliente");
+        bAtualizarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAtualizarClienteActionPerformed(evt);
+            }
+        });
 
         bExcluirCliente.setText("Excluir Cliente");
+        bExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bExcluirClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -214,6 +374,51 @@ public class GerenciarClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tFNomeActionPerformed
 
+    private void bIncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIncluirClienteActionPerformed
+        adicionarCliente(tFNome.getText(), tFSobrenome.getText(), tFRG.getText()
+        , tFCPF.getText(), tFEndereco.getText());
+        bListarClientes.doClick();
+        limparForm();
+    }//GEN-LAST:event_bIncluirClienteActionPerformed
+
+    private void bListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarClientesActionPerformed
+        ClientesTableModel.listaClientes.clear();
+        ClientesTableModel.listaClientes = listarClientes();
+        clientesTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_bListarClientesActionPerformed
+
+    private void bExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExcluirClienteActionPerformed
+        int linha = tClientes.getSelectedRow();
+        removerCliente(linha);
+        bListarClientes.doClick();
+    }//GEN-LAST:event_bExcluirClienteActionPerformed
+
+    private void bAtualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtualizarClienteActionPerformed
+        int linha = tClientes.getSelectedRow();
+        if (linha != -1) {
+            clienteTransfer = preencherCliente(linha);
+        }    
+    }//GEN-LAST:event_bAtualizarClienteActionPerformed
+
+    private void tFNomeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFNomeEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tFNomeEditActionPerformed
+
+    private void bConfirmarAlteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarAlteracaoActionPerformed
+        ClientesTableModel.listaClientes.remove(clienteTransfer);
+        alterarCliente(tFNomeEdit.getText(), tFSobrenomeEdit.getText(), tFRGEdit.getText()
+            , tFCPFEdit.getText(), tFEnderecoEdit.getText());
+    }//GEN-LAST:event_bConfirmarAlteracaoActionPerformed
+
+    private void bVoltarEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarEditActionPerformed
+        dAlterarCliente.setVisible(false);
+        bListarClientes.doClick();
+    }//GEN-LAST:event_bVoltarEditActionPerformed
+
+    private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_bVoltarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -242,32 +447,116 @@ public class GerenciarClientes extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GerenciarClientes().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAtualizarCliente;
+    private javax.swing.JButton bConfirmarAlteracao;
     private javax.swing.JButton bExcluirCliente;
     private javax.swing.JButton bIncluirCliente;
     private javax.swing.JButton bListarClientes;
     private javax.swing.JButton bVoltar;
+    private javax.swing.JButton bVoltarEdit;
+    private javax.swing.JDialog dAlterarCliente;
     private javax.swing.JLabel lCPF;
+    private javax.swing.JLabel lCPFEdit;
     private javax.swing.JLabel lEndereco;
+    private javax.swing.JLabel lEnderecoEdit;
     private javax.swing.JLabel lNome;
+    private javax.swing.JLabel lNomeEdit;
     private javax.swing.JLabel lRG;
+    private javax.swing.JLabel lRGEdit;
     private javax.swing.JLabel lSobrenome;
+    private javax.swing.JLabel lSobrenomeEdit;
     private javax.swing.JPanel pCadastroCliente;
     private javax.swing.JPanel pTabelaClientes;
     private javax.swing.JScrollPane sPTabelaClientes;
     private javax.swing.JTable tClientes;
     private javax.swing.JFormattedTextField tFCPF;
+    private javax.swing.JFormattedTextField tFCPFEdit;
     private javax.swing.JTextField tFEndereco;
+    private javax.swing.JTextField tFEnderecoEdit;
     private javax.swing.JTextField tFNome;
+    private javax.swing.JTextField tFNomeEdit;
     private javax.swing.JFormattedTextField tFRG;
+    private javax.swing.JFormattedTextField tFRGEdit;
     private javax.swing.JTextField tFSobrenome;
+    private javax.swing.JTextField tFSobrenomeEdit;
     // End of variables declaration//GEN-END:variables
+
+    private void adicionarCliente(String nome, String sobrenome, String RG,
+        String CPF, String endereco) {
+        Cliente cliente = new Cliente(nome, sobrenome, RG,
+                CPF, endereco);
+
+        if (clienteController.adicionarCliente(cliente)) {
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao cadastrar o cliente!\nVerifique se preencheu todos os campos ou se há campos duplicados.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        }    
+    }
+
+    private void limparForm() {
+        tFNome.setText("");
+        tFSobrenome.setText("");
+        tFRG.setValue(null);
+        tFCPF.setValue(null);
+        tFEndereco.setText("");
+    }
+
+    private List<Cliente> listarClientes() {
+        return clienteController.listarClientes();
+    }
+
+    private void removerCliente(int indice) {
+        Cliente cliente = null;
+        if (indice > -1)
+            cliente = ClientesTableModel.listaClientes.get(indice);
+        if (clienteController.removerCliente(cliente)) {
+            JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao excluir o cliente!\nO cliente possui veículos locados em seu nome\n"
+                            + "ou nenhum cliente foi selecionado.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        } 
+    }
+    
+    private void alterarCliente(String nome, String sobrenome, String RG,
+        String CPF, String endereco) {
+                
+        Cliente cliente = new Cliente(nome, sobrenome, RG,
+            CPF, endereco); 
+        if (clienteController.alterarCliente(cliente)) {
+            JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao alterar o cliente!\nOs campos possuem valores inválidos\n"
+                            + "ou nenhum cliente foi selecionado.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        } 
+    }
+
+    private Cliente preencherCliente(int indice) {
+        Cliente cliente = ClientesTableModel.listaClientes.get(indice);
+        tFNomeEdit.setText(cliente.getNome());
+        tFSobrenomeEdit.setText(cliente.getSobrenome());
+        tFCPFEdit.setText(cliente.getCPF());
+        tFRGEdit.setText(cliente.getRG());
+        tFEnderecoEdit.setText(cliente.getEndereco());
+        dAlterarCliente.setLocationRelativeTo(this);
+        dAlterarCliente.setVisible(true);
+        return cliente;
+    }
+   
 }

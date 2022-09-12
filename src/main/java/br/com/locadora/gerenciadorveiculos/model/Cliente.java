@@ -4,26 +4,47 @@
  */
 package br.com.locadora.gerenciadorveiculos.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author lucfg
  */
 public class Cliente {
     
-    final private String nome;
-    final private String sobrenome;
-    final private Double rg;
-    final private Double cpf;
-    final private String endereco;
+    private String nome;
+    private String sobrenome;
+    private String RG;
+    private String CPF;
+    private String endereco;
 
-    public Cliente(String nome, String sobrenome, Double rg, Double cpf, String endereco) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.rg = rg;
-        this.cpf = cpf;
-        this.endereco = endereco;
+    public Cliente(String nome, String sobrenome, String rg, String cpf, String endereco) {
+        this.nome = nome.toUpperCase();
+        this.sobrenome = sobrenome.toUpperCase();
+        this.RG = rg;
+        this.CPF = cpf;
+        this.endereco = endereco.toUpperCase();
     }
-    
-    
-    
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public String getRG() {
+        return RG;
+    }
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+        
 }

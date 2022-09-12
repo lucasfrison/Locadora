@@ -4,14 +4,22 @@
  */
 package br.com.locadora.gerenciadorveiculos.view;
 
-import br.com.locadora.gerenciadorveiculos.UIComponents.VenderVeiculosTableModel;
+import br.com.locadora.gerenciadorveiculos.controller.VeiculoController;
+import br.com.locadora.gerenciadorveiculos.model.Marca;
+import br.com.locadora.gerenciadorveiculos.model.Veiculo;
+import br.com.locadora.gerenciadorveiculos.uicomponents.VenderVeiculosTableModel;
+import java.util.List;
+import javax.swing.ButtonModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author lucfg
  */
-public class VenderVeiculos extends javax.swing.JFrame {
-
+public class VenderVeiculos extends javax.swing.JDialog {
+    
+    private VeiculoController veiculoController = new VeiculoController();
+    private VenderVeiculosTableModel venderVeiculosTableModel = new VenderVeiculosTableModel(listarVeiculosDisponiveis());
     /**
      * Creates new form VenderVeiculos
      */
@@ -28,6 +36,8 @@ public class VenderVeiculos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bGFiltroCategoria = new javax.swing.ButtonGroup();
+        bGFiltroTipo = new javax.swing.ButtonGroup();
         pFiltroTipoVeiculo = new javax.swing.JPanel();
         rBMoto = new javax.swing.JRadioButton();
         rBAutomovel = new javax.swing.JRadioButton();
@@ -44,17 +54,29 @@ public class VenderVeiculos extends javax.swing.JFrame {
         rBPopular = new javax.swing.JRadioButton();
         rBLuxo = new javax.swing.JRadioButton();
         lFiltroCategoria = new javax.swing.JLabel();
-        cBMarca = new javax.swing.JComboBox<>();
+        cBMarca = new javax.swing.JComboBox(Marca.values());
         lMarca = new javax.swing.JLabel();
+        bListarTodos = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        bGFiltroCategoria.add(rBPopular);
+        bGFiltroCategoria.add(rBIntermediario);
+        bGFiltroCategoria.add(rBLuxo);
+
+        bGFiltroTipo.add(rBAutomovel);
+        bGFiltroTipo.add(rBMoto);
+        bGFiltroTipo.add(rBVan);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vender Veiculos");
         setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        setModal(true);
 
         pFiltroTipoVeiculo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        rBMoto.setActionCommand("MOTOCICLETA");
         rBMoto.setText("Motocicleta");
 
+        rBAutomovel.setActionCommand("AUTOMOVEL");
         rBAutomovel.setText("Automóvel");
         rBAutomovel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,6 +84,7 @@ public class VenderVeiculos extends javax.swing.JFrame {
             }
         });
 
+        rBVan.setActionCommand("VAN");
         rBVan.setText("Van");
 
         lFiltroTipo.setText("Tipo do Veículo");
@@ -93,7 +116,10 @@ public class VenderVeiculos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tVeiculosDisponiveis.setModel(new VenderVeiculosTableModel());
+        sPVeiculosDisponiveis.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        //VenderVeiculosTableModel venderVeiculosTableModel = new VenderVeiculosTableModel(listarVeiculosDisponiveis());
+        tVeiculosDisponiveis.setModel(venderVeiculosTableModel);
         sPVeiculosDisponiveis.setViewportView(tVeiculosDisponiveis);
 
         javax.swing.GroupLayout pVeiculosDisponiveisLayout = new javax.swing.GroupLayout(pVeiculosDisponiveis);
@@ -132,6 +158,7 @@ public class VenderVeiculos extends javax.swing.JFrame {
 
         pFiltroCategoria.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        rBIntermediario.setActionCommand("INTERMEDIARIO");
         rBIntermediario.setText("Intermediário");
         rBIntermediario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +166,7 @@ public class VenderVeiculos extends javax.swing.JFrame {
             }
         });
 
+        rBPopular.setActionCommand("POPULAR");
         rBPopular.setText("Popular");
         rBPopular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +174,7 @@ public class VenderVeiculos extends javax.swing.JFrame {
             }
         });
 
+        rBLuxo.setActionCommand("LUXO");
         rBLuxo.setText("Luxo");
         rBLuxo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,9 +211,14 @@ public class VenderVeiculos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        cBMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lMarca.setText("Marca");
+
+        bListarTodos.setText("Listar Todos");
+        bListarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bListarTodosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -211,12 +245,14 @@ public class VenderVeiculos extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(bFiltrar))
+                                        .addComponent(bFiltrar)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(bListarTodos))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(pFiltroCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(pFiltroTipoVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(248, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +266,8 @@ public class VenderVeiculos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bFiltrar)
-                    .addComponent(cBMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cBMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bListarTodos))
                 .addGap(26, 26, 26)
                 .addComponent(pVeiculosDisponiveis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,15 +286,29 @@ public class VenderVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_rBAutomovelActionPerformed
 
     private void bFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFiltrarActionPerformed
-        // TODO add your handling code here:
+        VenderVeiculosTableModel.listaVeiculos.clear();
+        ButtonModel categoria = bGFiltroCategoria.getSelection();
+        ButtonModel tipo = bGFiltroTipo.getSelection();
+        String marca = cBMarca.getSelectedItem().toString();
+        try {
+            VenderVeiculosTableModel.listaVeiculos = listarVeiculosComFiltro(categoria.getActionCommand(),
+                tipo.getActionCommand(), marca);
+            venderVeiculosTableModel.fireTableDataChanged();
+        } catch (NullPointerException e) {
+            bListarTodos.doClick();
+        }
     }//GEN-LAST:event_bFiltrarActionPerformed
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVenderActionPerformed
-        // TODO add your handling code here:
+        int linha = tVeiculosDisponiveis.getSelectedRow();
+        if (linha >= 0) {
+            venderVeiculo(linha);
+        }
+        bListarTodos.doClick();
     }//GEN-LAST:event_bVenderActionPerformed
 
     private void rBPopularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBPopularActionPerformed
@@ -271,6 +322,12 @@ public class VenderVeiculos extends javax.swing.JFrame {
     private void rBLuxoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBLuxoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rBLuxoActionPerformed
+
+    private void bListarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarTodosActionPerformed
+        VenderVeiculosTableModel.listaVeiculos.clear();
+        VenderVeiculosTableModel.listaVeiculos = listarVeiculosDisponiveis();
+        venderVeiculosTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_bListarTodosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,17 +355,20 @@ public class VenderVeiculos extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VenderVeiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    
+        //Create and display the form */
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VenderVeiculos().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bFiltrar;
+    private javax.swing.ButtonGroup bGFiltroCategoria;
+    private javax.swing.ButtonGroup bGFiltroTipo;
+    private javax.swing.JButton bListarTodos;
     private javax.swing.JButton bVender;
     private javax.swing.JButton bVoltar;
     private javax.swing.JComboBox<String> cBMarca;
@@ -327,4 +387,25 @@ public class VenderVeiculos extends javax.swing.JFrame {
     private javax.swing.JScrollPane sPVeiculosDisponiveis;
     private javax.swing.JTable tVeiculosDisponiveis;
     // End of variables declaration//GEN-END:variables
+
+    private List<Veiculo> listarVeiculosDisponiveis() {
+        return veiculoController.listarVeiculosDisponiveis();
+    }
+
+    private void venderVeiculo(int linha) {
+        Veiculo veiculo = VenderVeiculosTableModel.listaVeiculos.get(linha);
+        if (veiculoController.venderVeiculo(veiculo)) {
+            JOptionPane.showMessageDialog(null, "Veículo vendido com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao vender o veículo!\n Nenhum veiculo foi selecionado.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private List<Veiculo> listarVeiculosComFiltro(String categoria, String tipo, String marca) {
+       return veiculoController.listarVeiculosComFiltro(categoria, tipo, marca); 
+    }
+
 }

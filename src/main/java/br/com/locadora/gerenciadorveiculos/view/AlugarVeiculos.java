@@ -4,13 +4,36 @@
  */
 package br.com.locadora.gerenciadorveiculos.view;
 
-import br.com.locadora.gerenciadorveiculos.UIComponents.AlugarVeiculosTableModel;
+import br.com.locadora.gerenciadorveiculos.controller.ClienteController;
+import br.com.locadora.gerenciadorveiculos.controller.VeiculoController;
+import br.com.locadora.gerenciadorveiculos.model.Cliente;
+import br.com.locadora.gerenciadorveiculos.model.Locacao;
+import br.com.locadora.gerenciadorveiculos.model.Marca;
+import br.com.locadora.gerenciadorveiculos.model.Veiculo;
+import br.com.locadora.gerenciadorveiculos.uicomponents.AlugarVeiculosTableModel;
+import br.com.locadora.gerenciadorveiculos.uicomponents.VenderVeiculosTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonModel;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author lucfg
  */
-public class AlugarVeiculos extends javax.swing.JFrame {
+public class AlugarVeiculos extends javax.swing.JDialog {
+ 
+    Cliente cliente;
+    Veiculo veiculo;
+    ClienteController clienteController = new ClienteController();
+    VeiculoController veiculoController = new VeiculoController();
+    AlugarVeiculosTableModel alugarVeiculosTableModel = new AlugarVeiculosTableModel(listarVeiculosDisponiveis());
 
     /**
      * Creates new form AlugarVeiculos
@@ -34,6 +57,9 @@ public class AlugarVeiculos extends javax.swing.JFrame {
         tFPeriodo = new javax.swing.JTextField();
         lPeriodo1 = new javax.swing.JLabel();
         tFData = new javax.swing.JFormattedTextField();
+        bVoltarConf = new javax.swing.JButton();
+        bGTipo = new javax.swing.ButtonGroup();
+        bGCategoria = new javax.swing.ButtonGroup();
         pVeiculosDisponiveis = new javax.swing.JPanel();
         sPVeiculosDisponiveis = new javax.swing.JScrollPane();
         tVeiculosDisponiveis = new javax.swing.JTable();
@@ -50,7 +76,7 @@ public class AlugarVeiculos extends javax.swing.JFrame {
         tFCPF = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         bFiltrar = new javax.swing.JButton();
-        cBMarca = new javax.swing.JComboBox<>();
+        cBMarca = new javax.swing.JComboBox(Marca.values());
         lMarca = new javax.swing.JLabel();
         pFiltroTipoVeiculo5 = new javax.swing.JPanel();
         rBMoto5 = new javax.swing.JRadioButton();
@@ -63,6 +89,7 @@ public class AlugarVeiculos extends javax.swing.JFrame {
         rBLuxo = new javax.swing.JRadioButton();
         lFiltroCategoria = new javax.swing.JLabel();
         lVeiculo = new javax.swing.JLabel();
+        bListar = new javax.swing.JButton();
 
         dConfirmarLocacao.setTitle("Confirmar Locação");
         dConfirmarLocacao.setLocation(new java.awt.Point(0, 0));
@@ -70,10 +97,15 @@ public class AlugarVeiculos extends javax.swing.JFrame {
         dConfirmarLocacao.setSize(new java.awt.Dimension(367, 200));
 
         bEfetivarLocacao.setText("Confirmar");
+        bEfetivarLocacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEfetivarLocacaoActionPerformed(evt);
+            }
+        });
 
         lPeriodo.setText("Tempo de Locação");
 
-        lPeriodo1.setText("Data de Devolução");
+        lPeriodo1.setText("Data da Locação");
 
         try {
             tFData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -81,14 +113,24 @@ public class AlugarVeiculos extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        bVoltarConf.setText("Voltar");
+        bVoltarConf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVoltarConfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dConfirmarLocacaoLayout = new javax.swing.GroupLayout(dConfirmarLocacao.getContentPane());
         dConfirmarLocacao.getContentPane().setLayout(dConfirmarLocacaoLayout);
         dConfirmarLocacaoLayout.setHorizontalGroup(
             dConfirmarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dConfirmarLocacaoLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(dConfirmarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(bEfetivarLocacao)
+                .addGroup(dConfirmarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(dConfirmarLocacaoLayout.createSequentialGroup()
+                        .addComponent(bVoltarConf)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bEfetivarLocacao))
                     .addGroup(dConfirmarLocacaoLayout.createSequentialGroup()
                         .addGroup(dConfirmarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lPeriodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -97,7 +139,7 @@ public class AlugarVeiculos extends javax.swing.JFrame {
                         .addGroup(dConfirmarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lPeriodo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tFData))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
         dConfirmarLocacaoLayout.setVerticalGroup(
             dConfirmarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,16 +153,21 @@ public class AlugarVeiculos extends javax.swing.JFrame {
                     .addComponent(tFPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(bEfetivarLocacao)
+                .addGroup(dConfirmarLocacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bEfetivarLocacao)
+                    .addComponent(bVoltarConf))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
         dConfirmarLocacao.getAccessibleContext().setAccessibleParent(this);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alugar Veículos");
+        setModal(true);
 
-        tVeiculosDisponiveis.setModel(new AlugarVeiculosTableModel());
+        sPVeiculosDisponiveis.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        tVeiculosDisponiveis.setModel(alugarVeiculosTableModel);
         sPVeiculosDisponiveis.setViewportView(tVeiculosDisponiveis);
 
         javax.swing.GroupLayout pVeiculosDisponiveisLayout = new javax.swing.GroupLayout(pVeiculosDisponiveis);
@@ -134,7 +181,7 @@ public class AlugarVeiculos extends javax.swing.JFrame {
         pVeiculosDisponiveisLayout.setVerticalGroup(
             pVeiculosDisponiveisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pVeiculosDisponiveisLayout.createSequentialGroup()
-                .addComponent(sPVeiculosDisponiveis, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addComponent(sPVeiculosDisponiveis, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -164,6 +211,11 @@ public class AlugarVeiculos extends javax.swing.JFrame {
         lCliente.setText("Informações do Cliente:");
 
         bPesquisarCliente.setText("Pesquisar");
+        bPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPesquisarClienteActionPerformed(evt);
+            }
+        });
 
         tFSobrenome.setEnabled(false);
         tFSobrenome.addActionListener(new java.awt.event.ActionListener() {
@@ -229,14 +281,14 @@ public class AlugarVeiculos extends javax.swing.JFrame {
             }
         });
 
-        cBMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         lMarca.setText("Marca");
 
         pFiltroTipoVeiculo5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        rBMoto5.setActionCommand("MOTOCICLETA");
         rBMoto5.setText("Motocicleta");
 
+        rBAutomovel5.setActionCommand("AUTOMOVEL");
         rBAutomovel5.setText("Automóvel");
         rBAutomovel5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,6 +296,7 @@ public class AlugarVeiculos extends javax.swing.JFrame {
             }
         });
 
+        rBVan5.setActionCommand("VAN");
         rBVan5.setText("Van");
 
         lFiltroTipo5.setText("Tipo do Veículo");
@@ -277,8 +330,13 @@ public class AlugarVeiculos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        bGTipo.add(rBMoto5);
+        bGTipo.add(rBAutomovel5);
+        bGTipo.add(rBVan5);
+
         pFiltroCategoria.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        rBIntermediario.setActionCommand("INTERMEDIARIO");
         rBIntermediario.setText("Intermediário");
         rBIntermediario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,6 +344,7 @@ public class AlugarVeiculos extends javax.swing.JFrame {
             }
         });
 
+        rBPopular.setActionCommand("POPULAR");
         rBPopular.setText("Popular");
         rBPopular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,6 +352,7 @@ public class AlugarVeiculos extends javax.swing.JFrame {
             }
         });
 
+        rBLuxo.setActionCommand("LUXO");
         rBLuxo.setText("Luxo");
         rBLuxo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,7 +391,18 @@ public class AlugarVeiculos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        bGCategoria.add(rBIntermediario);
+        bGCategoria.add(rBPopular);
+        bGCategoria.add(rBLuxo);
+
         lVeiculo.setText("Informações do Veículo:");
+
+        bListar.setText("Listar");
+        bListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bListarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -344,13 +415,15 @@ public class AlugarVeiculos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cBMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(bFiltrar))
+                        .addComponent(bFiltrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bListar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(pFiltroTipoVeiculo5, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
                         .addComponent(pFiltroCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lVeiculo))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,7 +438,8 @@ public class AlugarVeiculos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cBMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bFiltrar))
+                    .addComponent(bFiltrar)
+                    .addComponent(bListar))
                 .addGap(20, 20, 20))
         );
 
@@ -374,20 +448,20 @@ public class AlugarVeiculos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pVeiculosDisponiveis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(bLocar)
-                                .addGap(18, 18, 18)
-                                .addComponent(bVoltar))))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bLocar)
                         .addGap(18, 18, 18)
-                        .addComponent(pCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(bVoltar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(35, 35, 35)
+                            .addComponent(pVeiculosDisponiveis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(pCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -406,17 +480,21 @@ public class AlugarVeiculos extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        setSize(new java.awt.Dimension(788, 629));
+        setSize(new java.awt.Dimension(822, 629));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_bVoltarActionPerformed
 
     private void bLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLocarActionPerformed
         dConfirmarLocacao.setLocationRelativeTo(this);
-        dConfirmarLocacao.setVisible(true);
+        int linha = tVeiculosDisponiveis.getSelectedRow();
+        if (linha >= 0) {
+            veiculo = AlugarVeiculosTableModel.listaDeVeiculos.get(linha);
+            dConfirmarLocacao.setVisible(true);
+        }
     }//GEN-LAST:event_bLocarActionPerformed
 
     private void tFNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFNomeClienteActionPerformed
@@ -428,7 +506,17 @@ public class AlugarVeiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_tFSobrenomeActionPerformed
 
     private void bFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFiltrarActionPerformed
-        // TODO add your handling code here:
+        AlugarVeiculosTableModel.listaDeVeiculos.clear();
+        ButtonModel categoria = bGCategoria.getSelection();
+        ButtonModel tipo = bGTipo.getSelection();
+        String marca = cBMarca.getSelectedItem().toString();
+        try {
+            AlugarVeiculosTableModel.listaDeVeiculos = listarVeiculosComFiltro(categoria.getActionCommand(),
+                tipo.getActionCommand(), marca);
+            alugarVeiculosTableModel.fireTableDataChanged();
+        } catch (NullPointerException e) {
+            bListar.doClick();
+        }
     }//GEN-LAST:event_bFiltrarActionPerformed
 
     private void rBLuxoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBLuxoActionPerformed
@@ -446,6 +534,42 @@ public class AlugarVeiculos extends javax.swing.JFrame {
     private void rBAutomovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBAutomovelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rBAutomovelActionPerformed
+
+    private void bPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPesquisarClienteActionPerformed
+        cliente = buscarCliente(tFCPF.getText());
+        if (cliente != null) {
+            tFNomeCliente.setText(cliente.getNome());
+            tFSobrenome.setText(cliente.getSobrenome());
+        }    
+    }//GEN-LAST:event_bPesquisarClienteActionPerformed
+
+    private void bListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListarActionPerformed
+        AlugarVeiculosTableModel.listaDeVeiculos.clear();
+        AlugarVeiculosTableModel.listaDeVeiculos = listarVeiculosDisponiveis();
+        alugarVeiculosTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_bListarActionPerformed
+
+    private void bVoltarConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVoltarConfActionPerformed
+        dConfirmarLocacao.setVisible(false);
+    }//GEN-LAST:event_bVoltarConfActionPerformed
+
+    private void bEfetivarLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEfetivarLocacaoActionPerformed
+        int dias = Integer.parseInt(tFPeriodo.getText());
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            cal.setTime(sdf.parse(tFData.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(AlugarVeiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Locacao locacao = new Locacao(dias, veiculo.getValorDiariaLocacao() * dias, cal, cliente);
+        if (tFData.getText() != "" && tFPeriodo.getText() != "") {
+            locarVeiculo(cliente, veiculo, locacao);
+            bVoltarConf.doClick();
+            limparForm();
+            bListar.doClick();
+        }    
+    }//GEN-LAST:event_bEfetivarLocacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,20 +599,24 @@ public class AlugarVeiculos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 AlugarVeiculos alugarVeiculos = new AlugarVeiculos();
                 alugarVeiculos.setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bEfetivarLocacao;
     private javax.swing.JButton bFiltrar;
+    private javax.swing.ButtonGroup bGCategoria;
+    private javax.swing.ButtonGroup bGTipo;
+    private javax.swing.JButton bListar;
     private javax.swing.JButton bLocar;
     private javax.swing.JButton bPesquisarCliente;
     private javax.swing.JButton bVoltar;
+    private javax.swing.JButton bVoltarConf;
     private javax.swing.JComboBox<String> cBMarca;
     private javax.swing.JDialog dConfirmarLocacao;
     private javax.swing.JPanel jPanel1;
@@ -520,4 +648,40 @@ public class AlugarVeiculos extends javax.swing.JFrame {
     private javax.swing.JTextField tFSobrenome;
     private javax.swing.JTable tVeiculosDisponiveis;
     // End of variables declaration//GEN-END:variables
+
+    private Cliente buscarCliente(String cpf) {
+        Cliente cliente = clienteController.buscarCliente(cpf);
+        if (cliente == null) {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao buscar o cliente!\nVerifique o cpf.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        } 
+        return cliente;
+    }
+
+    private List<Veiculo> listarVeiculosDisponiveis() {
+        return veiculoController.listarVeiculosDisponiveis();
+    }
+
+    private List<Veiculo> listarVeiculosComFiltro(String categoria, String tipo, String marca) {
+       return veiculoController.listarVeiculosComFiltro(categoria, tipo, marca); 
+    }
+
+    private void locarVeiculo(Cliente cliente, Veiculo veiculo, Locacao locacao) {
+        if (veiculoController.locarVeiculo(cliente, veiculo, locacao)) {
+               JOptionPane.showMessageDialog(null, "Veículo alugado com sucesso!",
+                    "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao alugar o veículo!\n Verifique os campos.",
+                    "Atenção!", JOptionPane.WARNING_MESSAGE);
+        }
+        
+    }
+    
+    private void limparForm() {
+        tFCPF.setValue(null);
+        tFData.setValue(null);
+        tFPeriodo.setText("");
+    }
 }
