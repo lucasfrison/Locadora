@@ -17,8 +17,8 @@ public class ClientesTableModel extends AbstractTableModel{
     
     public static List<Cliente> listaClientes;
     
-    public ClientesTableModel(List<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
+    public ClientesTableModel(List<Cliente> listaDeClientes) {
+        listaClientes = listaDeClientes;
     }
     
     @Override

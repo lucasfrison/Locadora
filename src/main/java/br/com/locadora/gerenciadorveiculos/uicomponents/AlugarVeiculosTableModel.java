@@ -17,8 +17,8 @@ public class AlugarVeiculosTableModel extends AbstractTableModel{
         "Placa", "Marca", "Modelo", "Ano", "Valor da Diária"
     };
 
-    public AlugarVeiculosTableModel(List<Veiculo> listaDeVeiculos) {
-        this.listaDeVeiculos = listaDeVeiculos;
+    public AlugarVeiculosTableModel(List<Veiculo> listaVeiculos) {
+        listaDeVeiculos = listaVeiculos;
     }
     
     @Override
